@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.csp.mapper.TbPaperMapper">
+    
+    <resultMap type="TbPaper" id="TbPaperResult">
+        <result property="id"    column="id"    />
+        <result property="paperName"    column="paper_name"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectTbPaperVo">
+        select id, paper_name, create_by, create_time, update_by, update_time from tb_paper
+    </sql>
+
+    <select id="selectTbPaperList" parameterType="TbPaper" resultMap="TbPaperResult">
+        <include refid="selectTbPaperVo"/>
+        <where>  
+            <if test="paperName != null  and paperName != ''"> and paper_name like concat('%', #{paperName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectTbPaperById" parameterType="Long" resultMap="TbPaperResult">
+        <include refid="selectTbPaperVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTbPaper" parameterType="TbPaper" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_paper
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="paperName != null">paper_name,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="paperName != null">#{paperName},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbPaper" parameterType="TbPaper">
+        update tb_paper
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="paperName != null">paper_name = #{paperName},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbPaperById" parameterType="Long">
+        delete from tb_paper where id = #{id}
+    </delete>
+
+    <delete id="deleteTbPaperByIds" parameterType="String">
+        delete from tb_paper where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

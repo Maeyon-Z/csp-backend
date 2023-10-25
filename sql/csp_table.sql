@@ -20,12 +20,37 @@ CREATE TABLE `tb_exercises`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 comment '题目表';
 
-drop table if exists `tb_examination_paper`;
-CREATE TABLE `tb_examination_paper`
+drop table if exists `tb_paper`;
+CREATE TABLE `tb_paper`
 (
     id                    bigint auto_increment not null comment '主键',
-    exam_name             varchar(128) default '' comment '试卷名称',
-    user_ids              varchar(256) default '' comment '用户id列表,记录指定参加考试的用户',
+    paper_name            varchar(128) default '' comment '试卷名称',
+    create_by             varchar(64)  default '' comment '创建者',
+    create_time           datetime                comment '创建时间',
+    update_by             varchar(64)  default '' comment '更新者',
+    update_time           datetime                comment '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4 comment '试卷表（存放生成的试卷）';
+
+drop table if exists `tb_paper_exercise`;
+CREATE TABLE `tb_paper_exercise`
+(
+    id                    bigint auto_increment not null comment '主键',
+    paper_id              bigint default 0 comment '试卷id',
+    exercise_id           bigint default 0 comment '题目id',
+    score                 int4   default 0 comment '题目分数',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4 comment '试卷-题目映射表';
+
+
+drop table if exists `tb_exam`;
+CREATE TABLE `tb_exam`
+(
+    id                    bigint auto_increment not null comment '主键',
+    exam_name             varchar(128) default '' comment '考试名称',
+    paper_id              bigint       default 0  comment '试卷id',
     start_time            datetime                comment '开始时间',
     duration              int4         default 0  comment '持续时间，以分钟为单位',
     is_end                tinyint(3)   default 0  comment '是否结束 0:否 1:是',
@@ -36,34 +61,23 @@ CREATE TABLE `tb_examination_paper`
     update_time           datetime                comment '更新时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4 comment '试卷表（存放生成的试卷）';
-
-drop table if exists `tb_exam_exercise`;
-CREATE TABLE `tb_examination_exercise`
-(
-    id                    bigint auto_increment not null comment '主键',
-    exam_id               bigint default 0 comment '试卷id',
-    exercise_id           bigint default 0 comment '题目id',
-    score                 int4   default 0 comment '题目分数',
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4 comment '试卷-题目映射表';
+  DEFAULT CHARSET = utf8mb4 comment '考试表';
 
 drop table if exists `tb_exam_user`;
-CREATE TABLE `tb_examination_user`
+CREATE TABLE `tb_exam_user`
 (
     id                    bigint auto_increment not null comment '主键',
-    exam_id               bigint default 0 comment '试卷id',
+    exam_id               bigint default 0 comment '考试id',
     user_id               bigint default 0 comment '用户id',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4 comment '试卷-用户映射表';
+  DEFAULT CHARSET = utf8mb4 comment '考试-用户映射表（记录参加考试的用户）';
 
 drop table if exists `tb_examination_info`;
 CREATE TABLE `tb_examination_info`
 (
     id                    bigint auto_increment not null comment '主键',
-    exam_id               bigint        default 0  comment '试卷id',
+    exam_id               bigint        default 0  comment '考试id',
     user_id               bigint        default 0  comment '用户id',
     exercise_id           bigint        default 0  comment '题目id',
     is_true               int4          default 1  comment '是否正确 0：否 1：是',
