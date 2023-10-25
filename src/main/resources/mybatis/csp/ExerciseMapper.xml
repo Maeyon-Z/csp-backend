@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.csp.mapper.ExerciseMapper">
+    
+    <resultMap type="Exercise" id="ExerciseResult">
+        <result property="id"    column="id"    />
+        <result property="exerciseTitle"    column="exercise_title"    />
+        <result property="choiceA"    column="choice_a"    />
+        <result property="choiceB"    column="choice_b"    />
+        <result property="choiceC"    column="choice_c"    />
+        <result property="choiceD"    column="choice_d"    />
+        <result property="correctAnswer"    column="correct_answer"    />
+        <result property="analysis"    column="analysis"    />
+        <result property="exerciseType"    column="exercise_type"    />
+        <result property="quesType"    column="ques_type"    />
+        <result property="isDelete"    column="is_delete"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectExerciseVo">
+        select id, exercise_title, choice_a, choice_b, choice_c, choice_d, correct_answer, analysis, exercise_type, ques_type, is_delete, create_by, create_time, update_by, update_time from tb_exercises
+    </sql>
+
+    <select id="selectExerciseList" parameterType="Exercise" resultMap="ExerciseResult">
+        <include refid="selectExerciseVo"/>
+        <where>  
+            <if test="exerciseTitle != null  and exerciseTitle != ''"> and exercise_title like concat('%', #{exerciseTitle}, '%')</if>
+            <if test="exerciseType != null "> and exercise_type = #{exerciseType}</if>
+            <if test="quesType != null "> and ques_type = #{quesType}</if>
+             and is_delete = 0
+        </where>
+    </select>
+    
+    <select id="selectExerciseById" parameterType="Long" resultMap="ExerciseResult">
+        <include refid="selectExerciseVo"/>
+        where id = #{id} and is_delete = 0
+    </select>
+        
+    <insert id="insertExercise" parameterType="Exercise" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_exercises
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="exerciseTitle != null">exercise_title,</if>
+            <if test="choiceA != null">choice_a,</if>
+            <if test="choiceB != null">choice_b,</if>
+            <if test="choiceC != null">choice_c,</if>
+            <if test="choiceD != null">choice_d,</if>
+            <if test="correctAnswer != null">correct_answer,</if>
+            <if test="analysis != null">analysis,</if>
+            <if test="exerciseType != null">exercise_type,</if>
+            <if test="quesType != null">ques_type,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            is_delete
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="exerciseTitle != null">#{exerciseTitle},</if>
+            <if test="choiceA != null">#{choiceA},</if>
+            <if test="choiceB != null">#{choiceB},</if>
+            <if test="choiceC != null">#{choiceC},</if>
+            <if test="choiceD != null">#{choiceD},</if>
+            <if test="correctAnswer != null">#{correctAnswer},</if>
+            <if test="analysis != null">#{analysis},</if>
+            <if test="exerciseType != null">#{exerciseType},</if>
+            <if test="quesType != null">#{quesType},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            0
+         </trim>
+    </insert>
+
+    <update id="updateExercise" parameterType="Exercise">
+        update tb_exercises
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="exerciseTitle != null">exercise_title = #{exerciseTitle},</if>
+            <if test="choiceA != null">choice_a = #{choiceA},</if>
+            <if test="choiceB != null">choice_b = #{choiceB},</if>
+            <if test="choiceC != null">choice_c = #{choiceC},</if>
+            <if test="choiceD != null">choice_d = #{choiceD},</if>
+            <if test="correctAnswer != null">correct_answer = #{correctAnswer},</if>
+            <if test="analysis != null">analysis = #{analysis},</if>
+            <if test="exerciseType != null">exercise_type = #{exerciseType},</if>
+            <if test="quesType != null">ques_type = #{quesType},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="deleteExerciseById" parameterType="Long">
+        update from tb_exercises set is_delete = 1 where id = #{id}
+    </update>
+
+    <update id="deleteExerciseByIds" parameterType="String">
+        update tb_exercises set is_delete = 1 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+</mapper>
