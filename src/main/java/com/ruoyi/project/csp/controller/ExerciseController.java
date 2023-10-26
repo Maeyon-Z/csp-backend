@@ -47,19 +47,6 @@ public class ExerciseController extends BaseController
     }
 
     /**
-     * 导出题目列表
-     */
-    @PreAuthorize("@ss.hasPermi('dataControl:exercise:export')")
-    @Log(title = "题目管理", businessType = BusinessType.EXPORT)
-    @PostMapping("/export")
-    public void export(HttpServletResponse response, Exercise exercise)
-    {
-        List<Exercise> list = exerciseService.selectExerciseList(exercise);
-        ExcelUtil<Exercise> util = new ExcelUtil<Exercise>(Exercise.class);
-        util.exportExcel(response, list, "题目数据");
-    }
-
-    /**
      * 获取题目详细信息
      */
     @PreAuthorize("@ss.hasPermi('dataControl:exercise:query')")
@@ -96,9 +83,23 @@ public class ExerciseController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('dataControl:exercise:remove')")
     @Log(title = "题目管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
+    @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(exerciseService.deleteExerciseByIds(ids));
     }
+
+    /**
+     * 导出题目列表
+     */
+    @PreAuthorize("@ss.hasPermi('dataControl:exercise:export')")
+    @Log(title = "题目管理", businessType = BusinessType.EXPORT)
+    @PostMapping("/export")
+    public void export(HttpServletResponse response, Exercise exercise)
+    {
+        List<Exercise> list = exerciseService.selectExerciseList(exercise);
+        ExcelUtil<Exercise> util = new ExcelUtil<Exercise>(Exercise.class);
+        util.exportExcel(response, list, "题目数据");
+    }
+
 }

@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectExerciseById" parameterType="Long" resultMap="ExerciseResult">
         <include refid="selectExerciseVo"/>
-        where id = #{id} and is_delete = 0
+        where id = #{id}
     </select>
         
     <insert id="insertExercise" parameterType="Exercise" useGeneratedKeys="true" keyProperty="id">

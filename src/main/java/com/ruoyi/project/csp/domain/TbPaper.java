@@ -22,6 +22,20 @@ public class TbPaper extends BaseEntity
     @Excel(name = "试卷名称")
     private String paperName;
 
+    /** 是否删除 0:否 1:是 */
+    @Excel(name = "是否删除 0:否 1:是")
+    private Long isDelete;
+
+    public void setIsDelete(Long isDelete)
+    {
+        this.isDelete = isDelete;
+    }
+
+    public Long getIsDelete()
+    {
+        return isDelete;
+    }
+
     public void setId(Long id) 
     {
         this.id = id;
@@ -46,6 +60,7 @@ public class TbPaper extends BaseEntity
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
             .append("paperName", getPaperName())
+                .append("isDelete", getIsDelete())
             .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())

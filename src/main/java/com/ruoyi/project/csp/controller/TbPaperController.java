@@ -47,19 +47,6 @@ public class TbPaperController extends BaseController
     }
 
     /**
-     * 导出试卷管理列表
-     */
-    @PreAuthorize("@ss.hasPermi('dataControl:paper:export')")
-    @Log(title = "试卷管理", businessType = BusinessType.EXPORT)
-    @PostMapping("/export")
-    public void export(HttpServletResponse response, TbPaper tbPaper)
-    {
-        List<TbPaper> list = tbPaperService.selectTbPaperList(tbPaper);
-        ExcelUtil<TbPaper> util = new ExcelUtil<TbPaper>(TbPaper.class);
-        util.exportExcel(response, list, "试卷管理数据");
-    }
-
-    /**
      * 获取试卷管理详细信息
      */
     @PreAuthorize("@ss.hasPermi('dataControl:paper:query')")
@@ -100,5 +87,18 @@ public class TbPaperController extends BaseController
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(tbPaperService.deleteTbPaperByIds(ids));
+    }
+
+    /**
+     * 导出试卷管理列表
+     */
+    @PreAuthorize("@ss.hasPermi('dataControl:paper:export')")
+    @Log(title = "试卷管理", businessType = BusinessType.EXPORT)
+    @PostMapping("/export")
+    public void export(HttpServletResponse response, TbPaper tbPaper)
+    {
+        List<TbPaper> list = tbPaperService.selectTbPaperList(tbPaper);
+        ExcelUtil<TbPaper> util = new ExcelUtil<TbPaper>(TbPaper.class);
+        util.exportExcel(response, list, "试卷管理数据");
     }
 }

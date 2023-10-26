@@ -2,6 +2,7 @@ package com.ruoyi.project.csp.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.csp.mapper.TbPaperMapper;
@@ -54,6 +55,7 @@ public class TbPaperServiceImpl implements ITbPaperService
     public int insertTbPaper(TbPaper tbPaper)
     {
         tbPaper.setCreateTime(DateUtils.getNowDate());
+        tbPaper.setCreateBy(SecurityUtils.getUsername());
         return tbPaperMapper.insertTbPaper(tbPaper);
     }
 
@@ -67,6 +69,7 @@ public class TbPaperServiceImpl implements ITbPaperService
     public int updateTbPaper(TbPaper tbPaper)
     {
         tbPaper.setUpdateTime(DateUtils.getNowDate());
+        tbPaper.setUpdateBy(SecurityUtils.getUsername());
         return tbPaperMapper.updateTbPaper(tbPaper);
     }
 
