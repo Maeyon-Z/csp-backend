@@ -61,7 +61,7 @@ public class TbPaperController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('dataControl:paper:add')")
     @Log(title = "试卷管理", businessType = BusinessType.INSERT)
-    @PostMapping
+    @PostMapping("/add")
     public AjaxResult add(@RequestBody TbPaper tbPaper)
     {
         return toAjax(tbPaperService.insertTbPaper(tbPaper));
@@ -72,11 +72,12 @@ public class TbPaperController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('dataControl:paper:edit')")
     @Log(title = "试卷管理", businessType = BusinessType.UPDATE)
-    @PutMapping
+    @PutMapping("/edit")
     public AjaxResult edit(@RequestBody TbPaper tbPaper)
     {
         return toAjax(tbPaperService.updateTbPaper(tbPaper));
     }
+
 
     /**
      * 删除试卷管理
