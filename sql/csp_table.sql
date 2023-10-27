@@ -3,6 +3,8 @@ CREATE TABLE `tb_exercises`
 (
     id                    bigint auto_increment not null comment '主键',
     exercise_title        text comment '题目描述',
+    exercise_program      text comment '对于阅读程序和补全程序，记录程序部分',
+    parent_id             bigint not null default -1 comment '记录阅读程序和补全程序题与其子题的关系',
     choice_a              varchar(128) default '' comment '选项A',
     choice_b              varchar(128) default '' comment '选项B',
     choice_c              varchar(128) default '' comment '选项C',
@@ -18,7 +20,7 @@ CREATE TABLE `tb_exercises`
     update_time           datetime                comment '更新时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4 comment '题目表';
+  DEFAULT CHARSET = utf8mb4 comment '基础题目表';
 
 drop table if exists `tb_paper`;
 CREATE TABLE `tb_paper`

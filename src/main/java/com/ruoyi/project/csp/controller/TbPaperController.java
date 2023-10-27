@@ -84,7 +84,7 @@ public class TbPaperController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('dataControl:paper:remove')")
     @Log(title = "试卷管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
+	@DeleteMapping("/del/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(tbPaperService.deleteTbPaperByIds(ids));

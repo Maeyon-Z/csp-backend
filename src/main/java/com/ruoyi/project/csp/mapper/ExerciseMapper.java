@@ -60,4 +60,6 @@ public interface ExerciseMapper
      * @return 结果
      */
     public int deleteExerciseByIds(Long[] ids);
+
+    List<Exercise> selectExerciseByParentId(Long parentId);
 }

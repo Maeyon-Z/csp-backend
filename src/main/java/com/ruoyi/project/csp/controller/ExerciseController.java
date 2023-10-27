@@ -53,7 +53,21 @@ public class ExerciseController extends BaseController
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
+        // todo 题目存在图片如何处理，新增和修改也面临此问题
         return success(exerciseService.selectExerciseById(id));
+    }
+
+    /**
+     * 获取程序题下面的多道问题
+     * @param parentId
+     * @return
+     */
+    @PreAuthorize("@ss.hasPermi('dataControl:exercise:query')")
+    @GetMapping(value = "/ques/{parentId}")
+    public AjaxResult getQues(@PathVariable("parentId") Long parentId)
+    {
+        // todo 题目存在图片如何处理，新增和修改也面临此问题
+        return success(exerciseService.selectExerciseByParentId(parentId));
     }
 
     /**

@@ -58,4 +58,6 @@ public interface IExerciseService
      * @return 结果
      */
     public int deleteExerciseById(Long id);
+
+    List<Exercise> selectExerciseByParentId(Long parentId);
 }

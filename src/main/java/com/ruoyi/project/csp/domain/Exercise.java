@@ -22,6 +22,11 @@ public class Exercise extends BaseEntity
     @Excel(name = "题目描述")
     private String exerciseTitle;
 
+    @Excel(name = "题目程序")
+    private String exerciseProgram;
+
+    private Long parentId;
+
     /** 选项A */
     @Excel(name = "选项A")
     private String choiceA;
@@ -66,6 +71,25 @@ public class Exercise extends BaseEntity
     public Long getId() 
     {
         return id;
+    }
+
+    public void setParentId(Long parentId)
+    {
+        this.parentId = parentId;
+    }
+
+    public Long getParentId()
+    {
+        return this.parentId;
+    }
+
+
+    public String getExerciseProgram(){
+        return this.exerciseProgram;
+    }
+
+    public void setExerciseProgram(String exerciseProgram){
+        this.exerciseProgram = exerciseProgram;
     }
     public void setExerciseTitle(String exerciseTitle) 
     {
@@ -163,6 +187,7 @@ public class Exercise extends BaseEntity
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
             .append("exerciseTitle", getExerciseTitle())
+                .append("exerciseProgram", getExerciseProgram())
             .append("choiceA", getChoiceA())
             .append("choiceB", getChoiceB())
             .append("choiceC", getChoiceC())

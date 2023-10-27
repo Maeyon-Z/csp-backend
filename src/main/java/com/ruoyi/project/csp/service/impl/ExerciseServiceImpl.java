@@ -96,4 +96,9 @@ public class ExerciseServiceImpl implements IExerciseService
     {
         return exerciseMapper.deleteExerciseById(id);
     }
+
+    @Override
+    public List<Exercise> selectExerciseByParentId(Long parentId) {
+        return exerciseMapper.selectExerciseByParentId(parentId);
+    }
 }
