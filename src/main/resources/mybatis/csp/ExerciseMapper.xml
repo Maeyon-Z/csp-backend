@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectExerciseVo"/>
         <where>  
             <if test="exerciseTitle != null  and exerciseTitle != ''"> and exercise_title like concat('%', #{exerciseTitle}, '%')</if>
-            <if test="exerciseProgram != null  and exerciseProgram != ''"> and exerciseProgram like concat('%', #{exerciseProgram}, '%')</if>
+            <if test="exerciseProgram != null  and exerciseProgram != ''"> and exercise_program like concat('%', #{exerciseProgram}, '%')</if>
             <if test="exerciseType != null "> and exercise_type = #{exerciseType}</if>
             <if test="quesType != null "> and ques_type = #{quesType}</if>
             <if test="quesType == null"> and (ques_type = 1 or ques_type = 2 )</if>
@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
 
-    <select id="selectExerciseByParentId">
+    <select id="selectExerciseByParentId" parameterType="Long" resultMap="ExerciseResult">
         <include refid="selectExerciseVo"/>
         where parent_id = #{parentId} and is_delete = 0
     </select>
