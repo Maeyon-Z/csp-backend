@@ -33,7 +33,7 @@ public interface IExerciseService
      * @param exercise 题目
      * @return 结果
      */
-    public int insertExercise(Exercise exercise);
+    public Long insertExercise(Exercise exercise);
 
     /**
      * 修改题目

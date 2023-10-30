@@ -28,7 +28,7 @@ public class PaperExerciseController extends BaseController {
     @PostMapping("/genExercise")
     public AjaxResult genExercise(@RequestBody GenerateExerciseParams params)
     {
-        // todo 按照规则生成试卷题目
+        // todo 按照规则生成试卷题目，如何确定每道题目分值使得总分能是100
         return success(paperExerciseService.generateExercise(params));
     }
 

@@ -52,11 +52,12 @@ public class ExerciseServiceImpl implements IExerciseService
      * @return 结果
      */
     @Override
-    public int insertExercise(Exercise exercise)
+    public Long insertExercise(Exercise exercise)
     {
         exercise.setCreateTime(DateUtils.getNowDate());
         exercise.setCreateBy(SecurityUtils.getUsername());
-        return exerciseMapper.insertExercise(exercise);
+        exerciseMapper.insertExercise(exercise);
+        return exercise.getId();
     }
 
     /**

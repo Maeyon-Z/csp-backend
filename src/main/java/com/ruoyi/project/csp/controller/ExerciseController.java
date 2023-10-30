@@ -53,7 +53,6 @@ public class ExerciseController extends BaseController
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
-        // todo 题目存在图片如何处理，新增和修改也面临此问题
         return success(exerciseService.selectExerciseById(id));
     }
 
@@ -66,7 +65,6 @@ public class ExerciseController extends BaseController
     @GetMapping(value = "/ques/{parentId}")
     public AjaxResult getQues(@PathVariable("parentId") Long parentId)
     {
-        // todo 题目存在图片如何处理，新增和修改也面临此问题
         return success(exerciseService.selectExerciseByParentId(parentId));
     }
 
@@ -78,7 +76,7 @@ public class ExerciseController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody Exercise exercise)
     {
-        return toAjax(exerciseService.insertExercise(exercise));
+        return success(exerciseService.insertExercise(exercise));
     }
 
     /**

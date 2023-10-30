@@ -35,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="exerciseProgram != null  and exerciseProgram != ''"> and exerciseProgram like concat('%', #{exerciseProgram}, '%')</if>
             <if test="exerciseType != null "> and exercise_type = #{exerciseType}</if>
             <if test="quesType != null "> and ques_type = #{quesType}</if>
+            <if test="quesType == null"> and (ques_type = 1 or ques_type = 2 )</if>
              and is_delete = 0 and parent_id = -1
         </where>
     </select>
