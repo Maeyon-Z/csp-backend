@@ -22,10 +22,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
     </resultMap>
 
     <sql id="selectExerciseVo">
-        select id, exercise_title, exercise_program, choice_a, choice_b, choice_c, choice_d, correct_answer, analysis, exercise_type, ques_type, is_delete, create_by, create_time, update_by, update_time from tb_exercises
+        select id, exercise_title, exercise_program, choice_a, choice_b, choice_c, choice_d, correct_answer, analysis, exercise_type, ques_type, is_delete, create_by, create_time, update_by, update_time, remark from tb_exercises
     </sql>
 
     <select id="selectExerciseList" parameterType="Exercise" resultMap="ExerciseResult">
@@ -33,6 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="exerciseTitle != null  and exerciseTitle != ''"> and exercise_title like concat('%', #{exerciseTitle}, '%')</if>
             <if test="exerciseProgram != null  and exerciseProgram != ''"> and exercise_program like concat('%', #{exerciseProgram}, '%')</if>
+            <if test="remark != null  and remark != ''"> and remark like concat('%', #{remark}, '%')</if>
             <if test="exerciseType != null "> and exercise_type = #{exerciseType}</if>
             <if test="quesType != null "> and ques_type = #{quesType}</if>
             <if test="quesType == null"> and (ques_type = 1 or ques_type = 2 )</if>
@@ -68,6 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
             is_delete
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -86,6 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
             0
          </trim>
     </insert>
@@ -107,6 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
         </trim>
         where id = #{id}
     </update>

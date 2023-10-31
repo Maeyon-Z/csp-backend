@@ -18,6 +18,7 @@ CREATE TABLE `tb_exercises`
     create_time           datetime                comment '创建时间',
     update_by             varchar(64)  default '' comment '更新者',
     update_time           datetime                comment '更新时间',
+    remark                text comment '备注',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 comment '基础题目表';
