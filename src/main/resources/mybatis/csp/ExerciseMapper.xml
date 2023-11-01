@@ -52,6 +52,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where parent_id = #{parentId} and is_delete = 0
     </select>
 
+    <select id="genBase" parameterType="Long" resultMap="ExerciseResult">
+        <include refid="selectExerciseVo"/>
+        where is_delete = 0 and ques_type = 0 order by rand() limit #{count};
+    </select>
+
+
     <insert id="insertExercise" parameterType="Exercise" useGeneratedKeys="true" keyProperty="id">
         insert into tb_exercises
         <trim prefix="(" suffix=")" suffixOverrides=",">

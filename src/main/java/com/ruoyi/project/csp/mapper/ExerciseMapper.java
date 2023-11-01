@@ -62,4 +62,6 @@ public interface ExerciseMapper
     public int deleteExerciseByIds(Long[] ids);
 
     List<Exercise> selectExerciseByParentId(Long parentId);
+
+    List<Exercise> genBase(Integer count);
 }

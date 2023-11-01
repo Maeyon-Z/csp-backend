@@ -28,6 +28,7 @@ CREATE TABLE `tb_paper`
 (
     id                    bigint auto_increment not null comment '主键',
     paper_name            varchar(128) default '' comment '试卷名称',
+    remark                text comment '备注',
     is_delete             tinyint(3)   default 0  comment '是否删除 0:否 1:是',
     create_by             varchar(64)  default '' comment '创建者',
     create_time           datetime                comment '创建时间',

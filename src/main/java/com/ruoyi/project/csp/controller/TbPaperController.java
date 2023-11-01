@@ -2,6 +2,8 @@ package com.ruoyi.project.csp.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.project.csp.params.GenerateBaseExercisesParams;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,7 +66,14 @@ public class TbPaperController extends BaseController
     @PostMapping("/add")
     public AjaxResult add(@RequestBody TbPaper tbPaper)
     {
-        return toAjax(tbPaperService.insertTbPaper(tbPaper));
+        return success(tbPaperService.insertTbPaper(tbPaper));
+    }
+
+    @PreAuthorize("@ss.hasPermi('dataControl:paper:add')")
+    @PostMapping("/genBase")
+    public AjaxResult genBase(@RequestBody GenerateBaseExercisesParams params)
+    {
+        return success(tbPaperService.genBase(params));
     }
 
     /**

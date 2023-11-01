@@ -1,5 +1,6 @@
 package com.ruoyi.project.csp.domain;
 
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
@@ -11,6 +12,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
  * @author zmy
  * @date 2023-10-25
  */
+@Data
 public class Exercise extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -62,6 +64,8 @@ public class Exercise extends BaseEntity
     /** 是否删除 0:否 1:是 */
     @Excel(name = "是否删除 0:否 1:是")
     private Long isDelete;
+
+    private Integer score;
 
     public void setId(Long id) 
     {

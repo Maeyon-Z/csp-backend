@@ -1,7 +1,10 @@
 package com.ruoyi.project.csp.service;
 
 import java.util.List;
+
+import com.ruoyi.project.csp.domain.Exercise;
 import com.ruoyi.project.csp.domain.TbPaper;
+import com.ruoyi.project.csp.params.GenerateBaseExercisesParams;
 
 /**
  * 试卷管理Service接口
@@ -33,7 +36,7 @@ public interface ITbPaperService
      * @param tbPaper 试卷管理
      * @return 结果
      */
-    public int insertTbPaper(TbPaper tbPaper);
+    public Long insertTbPaper(TbPaper tbPaper);
 
     /**
      * 修改试卷管理
@@ -58,4 +61,6 @@ public interface ITbPaperService
      * @return 结果
      */
     public int deleteTbPaperById(Long id);
+
+    List<Exercise> genBase(GenerateBaseExercisesParams params);
 }

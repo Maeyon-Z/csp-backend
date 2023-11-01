@@ -7,6 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="TbPaper" id="TbPaperResult">
         <result property="id"    column="id"    />
         <result property="paperName"    column="paper_name"    />
+        <result property="remark"    column="remark"    />
         <result property="isDelete"    column="is_delete"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
@@ -15,13 +16,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectTbPaperVo">
-        select id, paper_name, is_delete, create_by, create_time, update_by, update_time from tb_paper
+        select id, paper_name, remark, is_delete, create_by, create_time, update_by, update_time from tb_paper
     </sql>
 
     <select id="selectTbPaperList" parameterType="TbPaper" resultMap="TbPaperResult">
         <include refid="selectTbPaperVo"/>
         <where>  
             <if test="paperName != null  and paperName != ''"> and paper_name like concat('%', #{paperName}, '%')</if>
+            <if test="remark != null  and remark != ''"> and remark like concat('%', #{remark}, '%')</if>
              and is_delete = 0
         </where>
     </select>
@@ -39,6 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
             is_delete
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -47,6 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
             0
          </trim>
     </insert>
@@ -55,6 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update tb_paper
         <trim prefix="SET" suffixOverrides=",">
             <if test="paperName != null">paper_name = #{paperName},</if>
+            <if test="remark != null">remark = #{remark},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>

@@ -3,6 +3,9 @@ package com.ruoyi.project.csp.service.impl;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.project.csp.domain.Exercise;
+import com.ruoyi.project.csp.mapper.ExerciseMapper;
+import com.ruoyi.project.csp.params.GenerateBaseExercisesParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.csp.mapper.TbPaperMapper;
@@ -16,10 +19,12 @@ import com.ruoyi.project.csp.service.ITbPaperService;
  * @date 2023-10-25
  */
 @Service
-public class TbPaperServiceImpl implements ITbPaperService 
+public class TbPaperServiceImpl implements ITbPaperService
 {
     @Autowired
     private TbPaperMapper tbPaperMapper;
+    @Autowired
+    private ExerciseMapper exerciseMapper;
 
     /**
      * 查询试卷管理
@@ -52,11 +57,12 @@ public class TbPaperServiceImpl implements ITbPaperService
      * @return 结果
      */
     @Override
-    public int insertTbPaper(TbPaper tbPaper)
+    public Long insertTbPaper(TbPaper tbPaper)
     {
         tbPaper.setCreateTime(DateUtils.getNowDate());
         tbPaper.setCreateBy(SecurityUtils.getUsername());
-        return tbPaperMapper.insertTbPaper(tbPaper);
+        tbPaperMapper.insertTbPaper(tbPaper);
+        return tbPaper.getId();
     }
 
     /**
@@ -95,5 +101,14 @@ public class TbPaperServiceImpl implements ITbPaperService
     public int deleteTbPaperById(Long id)
     {
         return tbPaperMapper.deleteTbPaperById(id);
+    }
+
+    @Override
+    public List<Exercise> genBase(GenerateBaseExercisesParams params) {
+        List<Exercise> res = exerciseMapper.genBase(params.getCount());
+        for(Exercise exercise : res){
+            exercise.setScore(params.getScore());
+        }
+        return res;
     }
 }
