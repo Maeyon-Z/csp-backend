@@ -111,4 +111,9 @@ public class TbPaperServiceImpl implements ITbPaperService
         }
         return res;
     }
+
+    @Override
+    public List<Integer> getBaseIds() {
+        return exerciseMapper.getBaseIds();
+    }
 }

@@ -76,6 +76,13 @@ public class TbPaperController extends BaseController
         return success(tbPaperService.genBase(params));
     }
 
+    @PreAuthorize("@ss.hasPermi('dataControl:paper:add')")
+    @PostMapping("/getBaseIds")
+    public AjaxResult getBaseIds()
+    {
+        return success(tbPaperService.getBaseIds());
+    }
+
     /**
      * 修改试卷管理
      */

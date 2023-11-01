@@ -63,4 +63,6 @@ public interface ITbPaperService
     public int deleteTbPaperById(Long id);
 
     List<Exercise> genBase(GenerateBaseExercisesParams params);
+
+    List<Integer> getBaseIds();
 }
