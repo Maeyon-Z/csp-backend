@@ -30,6 +30,14 @@ public class TbPaperExercise extends BaseEntity
     @Excel(name = "题目分数")
     private Long score;
 
+    public static TbPaperExercise build(Long paperId, Long exerciseId, Long score){
+        TbPaperExercise res = new TbPaperExercise();
+        res.setExerciseId(exerciseId);
+        res.setScore(score);
+        res.setPaperId(paperId);
+        return res;
+    }
+
     public void setId(Long id)
     {
         this.id = id;

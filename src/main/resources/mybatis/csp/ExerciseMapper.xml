@@ -65,6 +65,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select count(*) from tb_exercises where is_delete = 0 and parent_id = #{parentId};
     </select>
 
+    <select id="getQuesIds" parameterType="Long" resultType="Long" >
+        select id from tb_exercises where is_delete = 0 and parent_id = #{parentId};
+    </select>
+
     <insert id="insertExercise" parameterType="Exercise" useGeneratedKeys="true" keyProperty="id">
         insert into tb_exercises
         <trim prefix="(" suffix=")" suffixOverrides=",">

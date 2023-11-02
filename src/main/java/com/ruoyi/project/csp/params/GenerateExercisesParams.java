@@ -5,13 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class GenerateExerciseParams {
-
-    private Long paperId;
+@NoArgsConstructor
+public class GenerateExercisesParams {
 
     private Integer count;
+
+    private Integer score;
 
 
 }

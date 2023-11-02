@@ -4,14 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+import java.util.Map;
+
 @AllArgsConstructor
 @NoArgsConstructor
-public class GenerateBaseExercisesParams {
+@Data
+public class PaperSaveExerciseParams {
 
-    private Integer count;
-
+    private Long id;
     private Integer score;
 
-
+    // 记录程序题的子题分数
+    private Map<Integer, Integer> scoreList;
 }

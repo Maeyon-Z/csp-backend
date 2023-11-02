@@ -2,8 +2,8 @@ package com.ruoyi.project.csp.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
-
-import com.ruoyi.project.csp.params.GenerateBaseExercisesParams;
+import com.ruoyi.project.csp.params.GenerateExercisesParams;
+import com.ruoyi.project.csp.params.PaperSaveParams;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,13 +69,31 @@ public class TbPaperController extends BaseController
         return success(tbPaperService.insertTbPaper(tbPaper));
     }
 
+    /**
+     * 保存配置好的试卷
+     */
+    @PreAuthorize("@ss.hasPermi('dataControl:paper:add')")
+    @Log(title = "试卷管理", businessType = BusinessType.INSERT)
+    @PostMapping("/save")
+    public AjaxResult save(@RequestBody PaperSaveParams params)
+    {
+        tbPaperService.savePaper(params);
+        return AjaxResult.success();
+    }
+
+    /**
+     * 随机生成指定数量的指定题型的题目
+     */
     @PreAuthorize("@ss.hasPermi('dataControl:paper:add')")
     @PostMapping("/genExercise/{type}")
-    public AjaxResult genExercise(@RequestBody GenerateBaseExercisesParams params, @PathVariable("type") Integer type)
+    public AjaxResult genExercise(@RequestBody GenerateExercisesParams params, @PathVariable("type") Integer type)
     {
         return success(tbPaperService.genExercise(params, type));
     }
 
+    /**
+     * 获取某一题型的全部题目id
+     */
     @PreAuthorize("@ss.hasPermi('dataControl:paper:add')")
     @PostMapping("/getExerciseIds/{type}")
     public AjaxResult getExerciseIds(@PathVariable("type") Integer type)

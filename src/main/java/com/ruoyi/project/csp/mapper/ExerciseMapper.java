@@ -68,4 +68,6 @@ public interface ExerciseMapper
     List<Integer> getExerciseIds(Integer type);
 
     Integer getQuesCount(Long parentId);
+
+    List<Long> getQuesIds(Long id);
 }

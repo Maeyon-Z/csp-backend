@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.ruoyi.project.csp.domain.Exercise;
 import com.ruoyi.project.csp.domain.TbPaper;
-import com.ruoyi.project.csp.params.GenerateBaseExercisesParams;
+import com.ruoyi.project.csp.params.GenerateExercisesParams;
+import com.ruoyi.project.csp.params.PaperSaveParams;
 
 /**
  * 试卷管理Service接口
@@ -62,7 +63,9 @@ public interface ITbPaperService
      */
     public int deleteTbPaperById(Long id);
 
-    List<Exercise> genExercise(GenerateBaseExercisesParams params, Integer type);
+    List<Exercise> genExercise(GenerateExercisesParams params, Integer type);
 
     List<Integer> getExerciseIds(Integer type);
+
+    void savePaper(PaperSaveParams params);
 }

@@ -7,6 +7,7 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 题目对象 tb_exercises
@@ -69,7 +70,7 @@ public class Exercise extends BaseEntity
 
     private Integer score;
 
-    private List<Integer> scoreList;
+    private Map<Long, Integer> scoreList;
 
     public void setId(Long id) 
     {
