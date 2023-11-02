@@ -1,5 +1,7 @@
 package com.ruoyi.project.csp.service.impl;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
@@ -104,16 +106,26 @@ public class TbPaperServiceImpl implements ITbPaperService
     }
 
     @Override
-    public List<Exercise> genBase(GenerateBaseExercisesParams params) {
-        List<Exercise> res = exerciseMapper.genBase(params.getCount());
-        for(Exercise exercise : res){
-            exercise.setScore(params.getScore());
+    public List<Exercise> genExercise(GenerateBaseExercisesParams params, Integer type) {
+        List<Exercise> res = exerciseMapper.genExercise(params.getCount(), type);
+        if(type == 0){
+            for(Exercise exercise : res){
+                exercise.setScore(params.getScore());
+            }
+        } else {
+            for(Exercise exercise : res){
+                int count = exerciseMapper.getQuesCount(exercise.getId());
+                exercise.setScore(params.getScore() * count);
+                exercise.setScoreList(Collections.nCopies(count, params.getScore()));
+            }
         }
+
         return res;
     }
 
     @Override
-    public List<Integer> getBaseIds() {
-        return exerciseMapper.getBaseIds();
+    public List<Integer> getExerciseIds(Integer type) {
+        return exerciseMapper.getExerciseIds(type);
     }
+
 }

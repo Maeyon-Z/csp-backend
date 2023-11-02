@@ -30,7 +30,9 @@ public class ExerciseServiceImpl implements IExerciseService
     @Override
     public Exercise selectExerciseById(Long id)
     {
-        return exerciseMapper.selectExerciseById(id);
+        Exercise exercise = exerciseMapper.selectExerciseById(id);
+        exercise.setScore(0);
+        return exercise;
     }
 
     /**
@@ -100,6 +102,10 @@ public class ExerciseServiceImpl implements IExerciseService
 
     @Override
     public List<Exercise> selectExerciseByParentId(Long parentId) {
-        return exerciseMapper.selectExerciseByParentId(parentId);
+        List<Exercise> res = exerciseMapper.selectExerciseByParentId(parentId);
+        for(Exercise exercise : res){
+            exercise.setScore(0);
+        }
+        return res;
     }
 }

@@ -70,17 +70,17 @@ public class TbPaperController extends BaseController
     }
 
     @PreAuthorize("@ss.hasPermi('dataControl:paper:add')")
-    @PostMapping("/genBase")
-    public AjaxResult genBase(@RequestBody GenerateBaseExercisesParams params)
+    @PostMapping("/genExercise/{type}")
+    public AjaxResult genExercise(@RequestBody GenerateBaseExercisesParams params, @PathVariable("type") Integer type)
     {
-        return success(tbPaperService.genBase(params));
+        return success(tbPaperService.genExercise(params, type));
     }
 
     @PreAuthorize("@ss.hasPermi('dataControl:paper:add')")
-    @PostMapping("/getBaseIds")
-    public AjaxResult getBaseIds()
+    @PostMapping("/getExerciseIds/{type}")
+    public AjaxResult getExerciseIds(@PathVariable("type") Integer type)
     {
-        return success(tbPaperService.getBaseIds());
+        return success(tbPaperService.getExerciseIds(type));
     }
 
     /**

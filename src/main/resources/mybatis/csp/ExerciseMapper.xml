@@ -52,13 +52,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where parent_id = #{parentId} and is_delete = 0
     </select>
 
-    <select id="genBase" parameterType="Integer" resultMap="ExerciseResult">
+    <select id="genExercise" parameterType="Integer" resultMap="ExerciseResult">
         <include refid="selectExerciseVo"/>
-        where is_delete = 0 and ques_type = 0 order by rand() limit #{count};
+        where is_delete = 0 and ques_type = #{type} and parent_id = -1 order by rand() limit #{count};
     </select>
 
-    <select id="getBaseIds" resultType="Integer" >
-        select id from tb_exercises where is_delete = 0 and ques_type = 0 ;
+    <select id="getExerciseIds" parameterType="Integer" resultType="Integer" >
+        select id from tb_exercises where is_delete = 0 and ques_type = #{type} and parent_id = -1;
+    </select>
+
+    <select id="getQuesCount" parameterType="Long" resultType="Integer" >
+        select count(*) from tb_exercises where is_delete = 0 and parent_id = #{parentId};
     </select>
 
     <insert id="insertExercise" parameterType="Exercise" useGeneratedKeys="true" keyProperty="id">

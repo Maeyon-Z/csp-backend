@@ -63,7 +63,9 @@ public interface ExerciseMapper
 
     List<Exercise> selectExerciseByParentId(Long parentId);
 
-    List<Exercise> genBase(Integer count);
+    List<Exercise> genExercise(Integer count, Integer type);
 
-    List<Integer> getBaseIds();
+    List<Integer> getExerciseIds(Integer type);
+
+    Integer getQuesCount(Long parentId);
 }

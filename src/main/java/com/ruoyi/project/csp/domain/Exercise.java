@@ -6,6 +6,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
+import java.util.List;
+
 /**
  * 题目对象 tb_exercises
  * 
@@ -66,6 +68,8 @@ public class Exercise extends BaseEntity
     private Long isDelete;
 
     private Integer score;
+
+    private List<Integer> scoreList;
 
     public void setId(Long id) 
     {
