@@ -2,6 +2,7 @@ package com.ruoyi.project.system.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.ruoyi.project.system.domain.SysUser;
@@ -11,6 +12,7 @@ import com.ruoyi.project.system.domain.SysUser;
  * 
  * @author ruoyi
  */
+@Mapper
 public interface SysUserMapper
 {
     /**
@@ -126,4 +128,6 @@ public interface SysUserMapper
      * @return 结果
      */
     public SysUser checkEmailUnique(String email);
+
+    List<SysUser> getAllUser();
 }

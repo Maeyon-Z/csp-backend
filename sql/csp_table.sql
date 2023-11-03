@@ -49,16 +49,14 @@ CREATE TABLE `tb_paper_exercise`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 comment '试卷-题目映射表';
 
-
 drop table if exists `tb_exam`;
 CREATE TABLE `tb_exam`
 (
     id                    bigint auto_increment not null comment '主键',
     exam_name             varchar(128) default '' comment '考试名称',
     paper_id              bigint       default 0  comment '试卷id',
-    start_time            datetime                comment '开始时间',
+    paper_name            varchar(128) default '' comment '试卷名称（根据id自动填充）',
     duration              int4         default 0  comment '持续时间，以分钟为单位',
-    is_end                tinyint(3)   default 0  comment '是否结束 0:否 1:是',
     is_delete             tinyint(3)   default 0  comment '是否删除 0:否 1:是',
     create_by             varchar(64)  default '' comment '创建者',
     create_time           datetime                comment '创建时间',
@@ -74,6 +72,9 @@ CREATE TABLE `tb_exam_user`
     id                    bigint auto_increment not null comment '主键',
     exam_id               bigint default 0 comment '考试id',
     user_id               bigint default 0 comment '用户id',
+    `status`              tinyint(3) not null default 0  comment '状态（0：尚未开始 1：正在进行 2：已结束）',
+    start_time           datetime                comment '开始时间',
+    end_time             datetime                comment '结束时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4 comment '考试-用户映射表（记录参加考试的用户）';

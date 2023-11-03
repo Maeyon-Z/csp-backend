@@ -189,4 +189,9 @@ public class TbPaperServiceImpl implements ITbPaperService
 
     }
 
+    @Override
+    public List<TbPaper> getPaperListForExam() {
+        return tbPaperMapper.selectTbPaperList(null);
+    }
+
 }

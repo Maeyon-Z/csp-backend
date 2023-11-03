@@ -48,6 +48,13 @@ public class TbPaperController extends BaseController
         return getDataTable(list);
     }
 
+    @PreAuthorize("@ss.hasPermi('dataControl:paper:list')")
+    @GetMapping("/getPaperListForExam")
+    public AjaxResult getPaperListForExam()
+    {
+        return success(tbPaperService.getPaperListForExam());
+    }
+
     /**
      * 获取试卷管理详细信息
      */

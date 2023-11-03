@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.csp.mapper.TbExamUserMapper">
+
+    <resultMap type="TbExamUser" id="TbExamUserResult">
+        <result property="id"    column="id"    />
+        <result property="examId"    column="exam_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="status"    column="status"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+    </resultMap>
+
+    <sql id="selectTbExamUserVo">
+        select id, exam_id, user_id, status, start_time, end_time from tb_exam_user
+    </sql>
+
+    <select id="selectTbExamUserList" parameterType="TbExamUser" resultMap="TbExamUserResult">
+        <include refid="selectTbExamUserVo"/>
+        <where>
+            <if test="examId != null "> and exam_id = #{examId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="startTime != null "> and start_time = #{startTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+        </where>
+    </select>
+
+    <select id="selectTbExamUserById" parameterType="Long" resultMap="TbExamUserResult">
+        <include refid="selectTbExamUserVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTbExamUser" parameterType="TbExamUser" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_exam_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="examId != null">exam_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="status != null">status,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="examId != null">#{examId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTbExamUser" parameterType="TbExamUser">
+        update tb_exam_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="examId != null">exam_id = #{examId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbExamUserById" parameterType="Long">
+        delete from tb_exam_user where id = #{id}
+    </delete>
+
+    <delete id="deleteTbExamUserByIds" parameterType="String">
+        delete from tb_exam_user where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getExamUsersByExamId" parameterType="Long" resultType="Long">
+        select user_id from tb_exam_user where exam_id = #{examId}
+    </select>
+
+</mapper>

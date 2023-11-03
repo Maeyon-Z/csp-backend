@@ -60,4 +60,5 @@ public interface TbPaperMapper
      * @return 结果
      */
     public int deleteTbPaperByIds(Long[] ids);
+
 }

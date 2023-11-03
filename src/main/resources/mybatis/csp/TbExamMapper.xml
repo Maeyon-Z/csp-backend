@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.csp.mapper.TbExamMapper">
+    
+    <resultMap type="TbExam" id="TbExamResult">
+        <result property="id"    column="id"    />
+        <result property="examName"    column="exam_name"    />
+        <result property="paperId"    column="paper_id"    />
+        <result property="paperName"    column="paper_name"    />
+        <result property="duration"    column="duration"    />
+        <result property="isDelete"    column="is_delete"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectTbExamVo">
+        select id, exam_name, paper_id, paper_name, duration, is_delete, create_by, create_time, update_by, update_time from tb_exam
+    </sql>
+
+    <select id="selectTbExamList" parameterType="TbExam" resultMap="TbExamResult">
+        <include refid="selectTbExamVo"/>
+        <where>  
+            <if test="examName != null  and examName != ''"> and exam_name like concat('%', #{examName}, '%')</if>
+            <if test="paperName != null  and paperName != ''"> and paper_name like concat('%', #{paperName}, '%')</if>
+            and is_delete = 0
+        </where>
+    </select>
+    
+    <select id="selectTbExamById" parameterType="Long" resultMap="TbExamResult">
+        <include refid="selectTbExamVo"/>
+        where id = #{id} and is_delete = 0
+    </select>
+        
+    <insert id="insertTbExam" parameterType="TbExam" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_exam
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="examName != null">exam_name,</if>
+            <if test="paperId != null">paper_id,</if>
+            <if test="paperName != null">paper_name,</if>
+            <if test="duration != null">duration,</if>
+            <if test="isDelete != null">is_delete,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="examName != null">#{examName},</if>
+            <if test="paperId != null">#{paperId},</if>
+            <if test="paperName != null">#{paperName},</if>
+            <if test="duration != null">#{duration},</if>
+            <if test="isDelete != null">#{isDelete},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbExam" parameterType="TbExam">
+        update tb_exam
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="examName != null">exam_name = #{examName},</if>
+            <if test="paperId != null">paper_id = #{paperId},</if>
+            <if test="paperName != null">paper_name = #{paperName},</if>
+            <if test="duration != null">duration = #{duration},</if>
+            <if test="isDelete != null">is_delete = #{isDelete},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="deleteTbExamById" parameterType="Long">
+        update tb_exam set is_delete = 1 where id = #{id}
+    </update>
+
+    <update id="deleteTbExamByIds" parameterType="String">
+        update tb_exam set is_delete = 1 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+</mapper>

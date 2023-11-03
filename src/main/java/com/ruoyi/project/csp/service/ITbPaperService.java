@@ -70,4 +70,6 @@ public interface ITbPaperService
     void savePaper(PaperSaveParams params);
 
     List<Exercise> getPaperExercise(Long paperId, Long type);
+
+    List<TbPaper> getPaperListForExam();
 }
