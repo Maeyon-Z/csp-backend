@@ -15,25 +15,6 @@
         select id, paper_id, exercise_id, score from tb_paper_exercise
     </sql>
 
-    <select id="selectTbPaperExerciseListById" parameterType="TbPaperExercise" resultMap="TbPaperExerciseResult">
-        <include refid="selectTbPaperExerciseVo"/>
-        <where>
-            <if test="paperId != null "> and paper_id = #{paperId}</if>
-        </where>
-    </select>
-
-
-
-
-
-
-
-
-    <select id="selectTbPaperExerciseById" parameterType="Long" resultMap="TbPaperExerciseResult">
-        <include refid="selectTbPaperExerciseVo"/>
-        where id = #{id}
-    </select>
-
     <insert id="insertTbPaperExercise" parameterType="TbPaperExercise" useGeneratedKeys="true" keyProperty="id">
         insert into tb_paper_exercise
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -48,16 +29,6 @@
         </trim>
     </insert>
 
-    <update id="updateTbPaperExercise" parameterType="TbPaperExercise">
-        update tb_paper_exercise
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="paperId != null">paper_id = #{paperId},</if>
-            <if test="exerciseId != null">exercise_id = #{exerciseId},</if>
-            <if test="score != null">score = #{score},</if>
-        </trim>
-        where id = #{id}
-    </update>
-
     <delete id="deleteTbPaperExerciseById" parameterType="Long">
         delete from tb_paper_exercise where id = #{id}
     </delete>
@@ -68,4 +39,9 @@
             #{id}
         </foreach>
     </delete>
+
+    <select id="findChildExerciseScore" resultMap="TbPaperExerciseResult">
+        SELECT b.*, a.* FROM tb_paper_exercise a LEFT JOIN tb_exercises b on a.exercise_id = b.id where a.paper_id = #{paperId} and b.parent_id = #{parentId}
+    </select>
+
 </mapper>

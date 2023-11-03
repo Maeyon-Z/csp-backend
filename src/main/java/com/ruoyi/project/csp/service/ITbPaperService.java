@@ -68,4 +68,6 @@ public interface ITbPaperService
     List<Integer> getExerciseIds(Integer type);
 
     void savePaper(PaperSaveParams params);
+
+    List<Exercise> getPaperExercise(Long paperId, Long type);
 }

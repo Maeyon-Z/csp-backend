@@ -29,4 +29,6 @@ public interface PaperExerciseMapper
      * 批量删除试卷管理
      */
     public int deleteTbPaperExerciseByIds(Long[] ids);
+
+    List<TbPaperExercise> findChildExerciseScore(Long paperId, Long parentId);
 }

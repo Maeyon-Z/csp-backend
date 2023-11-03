@@ -70,4 +70,6 @@ public interface ExerciseMapper
     Integer getQuesCount(Long parentId);
 
     List<Long> getQuesIds(Long id);
+
+    List<Exercise> findPaperExerciseByType(Long paperId, Long type);
 }

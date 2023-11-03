@@ -59,6 +59,16 @@ public class TbPaperController extends BaseController
     }
 
     /**
+     * 获取试卷题目
+     */
+    @PreAuthorize("@ss.hasPermi('dataControl:paper:query')")
+    @GetMapping(value = "/getPaperExercise/{paperId}/{type}")
+    public AjaxResult getPaperExercise(@PathVariable("paperId") Long paperId, @PathVariable("type") Long type)
+    {
+        return success(tbPaperService.getPaperExercise(paperId, type));
+    }
+
+    /**
      * 新增试卷管理
      */
     @PreAuthorize("@ss.hasPermi('dataControl:paper:add')")

@@ -170,4 +170,23 @@ public class TbPaperServiceImpl implements ITbPaperService
         }
     }
 
+    @Override
+    public List<Exercise> getPaperExercise(Long paperId, Long type) {
+        if(type == 0L){
+            return exerciseMapper.findPaperExerciseByType(paperId, type);
+        }else{
+            List<Exercise> res = exerciseMapper.findPaperExerciseByType(paperId, type);
+            for(Exercise exercise : res){
+                List<TbPaperExercise> paperExercises = paperExerciseMapper.findChildExerciseScore(paperId, exercise.getId());
+                Map<Long, Integer> map = new HashMap<>();
+                for(TbPaperExercise paperExercise : paperExercises){
+                    map.put(paperExercise.getExerciseId(), paperExercise.getScore().intValue());
+                }
+                exercise.setScoreList(map);
+            }
+            return res;
+        }
+
+    }
+
 }

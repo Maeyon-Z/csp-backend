@@ -23,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="remark"    column="remark"    />
+        <result property="score"    column="score"    />
     </resultMap>
 
     <sql id="selectExerciseVo">
@@ -143,4 +144,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </update>
+
+    <select id="findPaperExerciseByType" resultMap="ExerciseResult">
+        SELECT b.*, a.score
+        FROM tb_paper_exercise a LEFT JOIN tb_exercises b on a.exercise_id = b.id
+        where a.paper_id = #{paperId} and b.parent_id = -1 and b.ques_type = #{type}
+    </select>
+
+
 </mapper>
