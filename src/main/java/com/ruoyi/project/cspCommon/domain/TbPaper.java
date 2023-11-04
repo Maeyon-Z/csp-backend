@@ -1,4 +1,4 @@
-package com.ruoyi.project.csp.domain;
+package com.ruoyi.project.cspCommon.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

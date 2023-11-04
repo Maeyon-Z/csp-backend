@@ -1,13 +1,13 @@
-package com.ruoyi.project.csp.service.impl;
+package com.ruoyi.project.cspCommon.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.project.csp.mapper.ExerciseMapper;
-import com.ruoyi.project.csp.domain.Exercise;
-import com.ruoyi.project.csp.service.IExerciseService;
+import com.ruoyi.project.cspCommon.mapper.ExerciseMapper;
+import com.ruoyi.project.cspCommon.domain.Exercise;
+import com.ruoyi.project.cspCommon.service.IExerciseService;
 
 /**
  * 题目Service业务层处理

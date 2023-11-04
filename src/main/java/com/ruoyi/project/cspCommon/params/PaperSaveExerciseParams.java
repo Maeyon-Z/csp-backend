@@ -1,4 +1,4 @@
-package com.ruoyi.project.csp.params;
+package com.ruoyi.project.cspCommon.params;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

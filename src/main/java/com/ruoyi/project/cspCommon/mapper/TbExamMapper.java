@@ -1,16 +1,17 @@
-package com.ruoyi.project.csp.service;
+package com.ruoyi.project.cspCommon.mapper;
 
 import java.util.List;
-import com.ruoyi.project.csp.domain.TbExam;
-import com.ruoyi.project.system.domain.SysUser;
+import com.ruoyi.project.cspCommon.domain.TbExam;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 考试管理Service接口
+ * 考试管理Mapper接口
  * 
  * @author zzz
  * @date 2023-11-03
  */
-public interface ITbExamService 
+@Mapper
+public interface TbExamMapper 
 {
     /**
      * 查询考试管理
@@ -45,20 +46,18 @@ public interface ITbExamService
     public int updateTbExam(TbExam tbExam);
 
     /**
-     * 批量删除考试管理
-     * 
-     * @param ids 需要删除的考试管理主键集合
-     * @return 结果
-     */
-    public int deleteTbExamByIds(Long[] ids);
-
-    /**
-     * 删除考试管理信息
+     * 删除考试管理
      * 
      * @param id 考试管理主键
      * @return 结果
      */
     public int deleteTbExamById(Long id);
 
-    List<SysUser> getAllUser();
+    /**
+     * 批量删除考试管理
+     * 
+     * @param ids 需要删除的数据主键集合
+     * @return 结果
+     */
+    public int deleteTbExamByIds(Long[] ids);
 }

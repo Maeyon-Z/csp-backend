@@ -1,18 +1,17 @@
-package com.ruoyi.project.csp.service.impl;
+package com.ruoyi.project.cspCommon.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
-import com.ruoyi.framework.aspectj.lang.annotation.DataScope;
-import com.ruoyi.project.csp.domain.TbExamUser;
-import com.ruoyi.project.csp.mapper.TbExamUserMapper;
+import com.ruoyi.project.cspCommon.domain.TbExamUser;
+import com.ruoyi.project.cspCommon.mapper.TbExamUserMapper;
 import com.ruoyi.project.system.domain.SysUser;
 import com.ruoyi.project.system.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.project.csp.mapper.TbExamMapper;
-import com.ruoyi.project.csp.domain.TbExam;
-import com.ruoyi.project.csp.service.ITbExamService;
+import com.ruoyi.project.cspCommon.mapper.TbExamMapper;
+import com.ruoyi.project.cspCommon.domain.TbExam;
+import com.ruoyi.project.cspCommon.service.ITbExamService;
 
 /**
  * 考试管理Service业务层处理

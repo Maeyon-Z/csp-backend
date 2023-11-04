@@ -1,7 +1,7 @@
-package com.ruoyi.project.csp.service;
+package com.ruoyi.project.cspCommon.service;
 
 import java.util.List;
-import com.ruoyi.project.csp.domain.Exercise;
+import com.ruoyi.project.cspCommon.domain.Exercise;
 
 /**
  * 题目Service接口

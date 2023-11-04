@@ -1,9 +1,9 @@
-package com.ruoyi.project.csp.controller;
+package com.ruoyi.project.cspApi.dataControl;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
-import com.ruoyi.project.csp.params.GenerateExercisesParams;
-import com.ruoyi.project.csp.params.PaperSaveParams;
+import com.ruoyi.project.cspCommon.params.GenerateExercisesParams;
+import com.ruoyi.project.cspCommon.params.PaperSaveParams;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.csp.domain.TbPaper;
+import com.ruoyi.project.cspCommon.domain.TbPaper;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
-import com.ruoyi.project.csp.service.ITbPaperService;
+import com.ruoyi.project.cspCommon.service.ITbPaperService;
 
 /**
  * 试卷管理Controller

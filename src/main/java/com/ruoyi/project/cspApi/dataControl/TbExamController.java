@@ -1,4 +1,4 @@
-package com.ruoyi.project.csp.controller;
+package com.ruoyi.project.cspApi.dataControl;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.csp.domain.TbExam;
-import com.ruoyi.project.csp.service.ITbExamService;
+import com.ruoyi.project.cspCommon.domain.TbExam;
+import com.ruoyi.project.cspCommon.service.ITbExamService;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;

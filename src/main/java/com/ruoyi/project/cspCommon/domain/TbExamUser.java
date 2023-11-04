@@ -1,4 +1,4 @@
-package com.ruoyi.project.csp.domain;
+package com.ruoyi.project.cspCommon.domain;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;

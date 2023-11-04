@@ -1,21 +1,21 @@
-package com.ruoyi.project.csp.service.impl;
+package com.ruoyi.project.cspCommon.service.impl;
 
 import java.util.*;
 
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
-import com.ruoyi.project.csp.domain.Exercise;
-import com.ruoyi.project.csp.domain.TbPaperExercise;
-import com.ruoyi.project.csp.mapper.ExerciseMapper;
-import com.ruoyi.project.csp.mapper.PaperExerciseMapper;
-import com.ruoyi.project.csp.params.GenerateExercisesParams;
-import com.ruoyi.project.csp.params.PaperSaveExerciseParams;
-import com.ruoyi.project.csp.params.PaperSaveParams;
+import com.ruoyi.project.cspCommon.domain.Exercise;
+import com.ruoyi.project.cspCommon.domain.TbPaperExercise;
+import com.ruoyi.project.cspCommon.mapper.ExerciseMapper;
+import com.ruoyi.project.cspCommon.mapper.PaperExerciseMapper;
+import com.ruoyi.project.cspCommon.params.GenerateExercisesParams;
+import com.ruoyi.project.cspCommon.params.PaperSaveExerciseParams;
+import com.ruoyi.project.cspCommon.params.PaperSaveParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.project.csp.mapper.TbPaperMapper;
-import com.ruoyi.project.csp.domain.TbPaper;
-import com.ruoyi.project.csp.service.ITbPaperService;
+import com.ruoyi.project.cspCommon.mapper.TbPaperMapper;
+import com.ruoyi.project.cspCommon.domain.TbPaper;
+import com.ruoyi.project.cspCommon.service.ITbPaperService;
 
 /**
  * 试卷管理Service业务层处理

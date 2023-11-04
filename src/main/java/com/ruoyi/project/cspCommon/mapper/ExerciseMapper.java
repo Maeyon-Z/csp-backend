@@ -1,7 +1,7 @@
-package com.ruoyi.project.csp.mapper;
+package com.ruoyi.project.cspCommon.mapper;
 
 import java.util.List;
-import com.ruoyi.project.csp.domain.Exercise;
+import com.ruoyi.project.cspCommon.domain.Exercise;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

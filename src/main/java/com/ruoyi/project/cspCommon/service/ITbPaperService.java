@@ -1,11 +1,11 @@
-package com.ruoyi.project.csp.service;
+package com.ruoyi.project.cspCommon.service;
 
 import java.util.List;
 
-import com.ruoyi.project.csp.domain.Exercise;
-import com.ruoyi.project.csp.domain.TbPaper;
-import com.ruoyi.project.csp.params.GenerateExercisesParams;
-import com.ruoyi.project.csp.params.PaperSaveParams;
+import com.ruoyi.project.cspCommon.domain.Exercise;
+import com.ruoyi.project.cspCommon.domain.TbPaper;
+import com.ruoyi.project.cspCommon.params.GenerateExercisesParams;
+import com.ruoyi.project.cspCommon.params.PaperSaveParams;
 
 /**
  * 试卷管理Service接口
