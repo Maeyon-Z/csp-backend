@@ -78,4 +78,8 @@
         select user_id from tb_exam_user where exam_id = #{examId}
     </select>
 
+    <update id="startExam">
+        update tb_exam_user set `status` = 1 where user_id = #{userId} and exam_id = #{examId}
+    </update>
+
 </mapper>

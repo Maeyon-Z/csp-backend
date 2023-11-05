@@ -1,6 +1,8 @@
 package com.ruoyi.project.cspCommon.mapper;
 
 import java.util.List;
+
+import com.ruoyi.project.cspCommon.domain.StuExam;
 import com.ruoyi.project.cspCommon.domain.TbExam;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -60,4 +62,6 @@ public interface TbExamMapper
      * @return 结果
      */
     public int deleteTbExamByIds(Long[] ids);
+
+    List<StuExam> selectStuExamList(String examName, Long stuId);
 }

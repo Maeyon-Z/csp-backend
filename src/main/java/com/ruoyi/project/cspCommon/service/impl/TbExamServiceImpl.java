@@ -3,6 +3,7 @@ package com.ruoyi.project.cspCommon.service.impl;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.project.cspCommon.domain.StuExam;
 import com.ruoyi.project.cspCommon.domain.TbExamUser;
 import com.ruoyi.project.cspCommon.mapper.TbExamUserMapper;
 import com.ruoyi.project.system.domain.SysUser;
@@ -121,5 +122,23 @@ public class TbExamServiceImpl implements ITbExamService
     @Override
     public List<SysUser> getAllUser() {
         return sysUserMapper.getAllUser();
+    }
+
+    @Override
+    public List<StuExam> selectStuExamList(TbExam tbExam) {
+        Long stuId = SecurityUtils.getUserId();
+        List<StuExam> res = tbExamMapper.selectStuExamList(tbExam.getExamName(), stuId);
+
+        for(StuExam exam : res){
+            exam.setUsers(tbExamUserMapper.getExamUsersByExamId(exam.getExamId()));
+        }
+
+        return res;
+    }
+
+    @Override
+    public int startExam(Long userId, Long examId) {
+        tbExamUserMapper.startExam(userId, examId);
+        return 1;
     }
 }
