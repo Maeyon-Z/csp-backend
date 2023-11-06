@@ -2,6 +2,9 @@ package com.ruoyi.project.cspCommon.domain;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
@@ -13,6 +16,9 @@ import com.ruoyi.framework.web.domain.BaseEntity;
  * @author zzz
  * @date 2023-11-03
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TbExamUser extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -42,6 +48,8 @@ public class TbExamUser extends BaseEntity
     @Excel(name = "结束时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date endTime;
 
+    private Integer score;
+
 
     public static TbExamUser buildForInsert(Long examId, Long userId){
         TbExamUser tbExamUser = new TbExamUser();
@@ -61,70 +69,4 @@ public class TbExamUser extends BaseEntity
         return tbExamUser;
     }
 
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
-
-    public Long getId()
-    {
-        return id;
-    }
-    public void setExamId(Long examId)
-    {
-        this.examId = examId;
-    }
-
-    public Long getExamId()
-    {
-        return examId;
-    }
-    public void setUserId(Long userId)
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId()
-    {
-        return userId;
-    }
-    public void setStatus(Long status)
-    {
-        this.status = status;
-    }
-
-    public Long getStatus()
-    {
-        return status;
-    }
-    public void setStartTime(Date startTime)
-    {
-        this.startTime = startTime;
-    }
-
-    public Date getStartTime()
-    {
-        return startTime;
-    }
-    public void setEndTime(Date endTime)
-    {
-        this.endTime = endTime;
-    }
-
-    public Date getEndTime()
-    {
-        return endTime;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("examId", getExamId())
-                .append("userId", getUserId())
-                .append("status", getStatus())
-                .append("startTime", getStartTime())
-                .append("endTime", getEndTime())
-                .toString();
-    }
 }

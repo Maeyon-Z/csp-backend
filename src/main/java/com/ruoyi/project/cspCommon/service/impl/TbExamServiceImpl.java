@@ -35,6 +35,7 @@ public class TbExamServiceImpl implements ITbExamService
     @Autowired
     private TbExaminationInfoMapper tbExaminationInfoMapper;
 
+
     /**
      * 查询考试管理
      * 
@@ -154,8 +155,9 @@ public class TbExamServiceImpl implements ITbExamService
 
     @Override
     public int submitExam(SubmitExamParams params) {
+        // todo 记录错题
         // 提交试卷
-        // 1、对于每道题目，判断是否正确，同时计算总分数、插入考试记录表
+        // 1、对于每道题目，判断是否正确，同时计算总分数、插入考试记录表a
         Long userId = params.getUserId();
         Long examId = params.getExamId();
         Integer score = 0;
@@ -172,6 +174,11 @@ public class TbExamServiceImpl implements ITbExamService
         // 2、更新用户-考试关系表
         tbExamUserMapper.endExam(userId, examId, score);
         return score;
+    }
+
+    @Override
+    public List<TbExamUser> getRank(Long examId) {
+        return tbExamUserMapper.getExamRank(examId);
     }
 
 }

@@ -67,4 +67,11 @@ public class StuExamController extends BaseController
         return success(tbExamService.submitExam(params));
     }
 
+    @PreAuthorize("@ss.hasPermi('stu:exam:list')")
+    @GetMapping("/getRank/{examId}")
+    public AjaxResult getRank(@PathVariable("examId") Long examId)
+    {
+        return success(tbExamService.getRank(examId));
+    }
+
 }
