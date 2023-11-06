@@ -2,6 +2,7 @@ package com.ruoyi.project.cspCommon.mapper;
 
 import java.util.List;
 import com.ruoyi.project.cspCommon.domain.Exercise;
+import com.ruoyi.project.cspCommon.params.GeneratePracticeParams;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -72,4 +73,6 @@ public interface ExerciseMapper
     List<Long> getQuesIds(Long id);
 
     List<Exercise> findPaperExerciseByType(Long paperId, Long type);
+
+    List<Exercise> genPractice(Integer count, Integer type);
 }

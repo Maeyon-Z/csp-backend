@@ -151,5 +151,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where a.paper_id = #{paperId} and b.parent_id = -1 and b.ques_type = #{type}
     </select>
 
+    <select id="genPractice" resultMap="ExerciseResult">
+        <include refid="selectExerciseVo"/>
+        <where>x
+            <if test="type != -1 "> and ques_type = #{type}</if>
+            and is_delete = 0 and parent_id = -1
+        </where>
+        order by rand() limit #{count};
+    </select>
 
 </mapper>

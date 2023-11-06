@@ -3,6 +3,7 @@ package com.ruoyi.project.cspCommon.service.impl;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.project.cspCommon.params.GeneratePracticeParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.cspCommon.mapper.ExerciseMapper;
@@ -107,5 +108,11 @@ public class ExerciseServiceImpl implements IExerciseService
             exercise.setScore(0);
         }
         return res;
+    }
+
+    @Override
+    public List<Exercise> genPractice(GeneratePracticeParams params) {
+        if(params.getCount() == -1) params.setCount(null);
+        return exerciseMapper.genPractice(params.getCount(), params.getType());
     }
 }

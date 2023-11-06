@@ -2,6 +2,7 @@ package com.ruoyi.project.cspCommon.service;
 
 import java.util.List;
 import com.ruoyi.project.cspCommon.domain.Exercise;
+import com.ruoyi.project.cspCommon.params.GeneratePracticeParams;
 
 /**
  * 题目Service接口
@@ -60,4 +61,6 @@ public interface IExerciseService
     public int deleteExerciseById(Long id);
 
     List<Exercise> selectExerciseByParentId(Long parentId);
+
+    List<Exercise> genPractice(GeneratePracticeParams params);
 }
