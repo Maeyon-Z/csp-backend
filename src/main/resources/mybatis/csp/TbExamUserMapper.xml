@@ -82,4 +82,8 @@
         update tb_exam_user set `status` = 1, start_time = #{startTime}, end_time = #{endTime} where user_id = #{userId} and exam_id = #{examId}
     </update>
 
+    <update id="endExam">
+        update tb_exam_user set `status` = 2, score = #{score} where user_id = #{userId} and exam_id = #{examId}
+    </update>
+
 </mapper>

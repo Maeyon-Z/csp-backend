@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruoyi.project.cspCommon.domain.StuExam;
 import com.ruoyi.project.cspCommon.domain.TbExam;
+import com.ruoyi.project.cspCommon.params.SubmitExamParams;
 import com.ruoyi.project.system.domain.SysUser;
 
 /**
@@ -69,4 +70,6 @@ public interface ITbExamService
     int startExam(StuExam stuExam);
 
     StuExam getStuExamById(Long id);
+
+    int submitExam(SubmitExamParams params);
 }

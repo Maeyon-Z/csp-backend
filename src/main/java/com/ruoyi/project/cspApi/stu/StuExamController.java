@@ -5,12 +5,14 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.cspCommon.domain.StuExam;
 import com.ruoyi.project.cspCommon.domain.TbExam;
+import com.ruoyi.project.cspCommon.params.SubmitExamParams;
 import com.ruoyi.project.cspCommon.service.ITbExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 考试管理Controller
@@ -58,4 +60,11 @@ public class StuExamController extends BaseController
         return toAjax(tbExamService.startExam(stuExam));
     }
 
-  }
+    @PreAuthorize("@ss.hasPermi('stu:exam:list')")
+    @PostMapping("/submitExam")
+    public AjaxResult submitExam(@RequestBody SubmitExamParams params)
+    {
+        return success(tbExamService.submitExam(params));
+    }
+
+}

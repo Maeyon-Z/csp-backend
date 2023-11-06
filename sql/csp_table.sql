@@ -73,6 +73,7 @@ CREATE TABLE `tb_exam_user`
     exam_id               bigint default 0 comment '考试id',
     user_id               bigint default 0 comment '用户id',
     `status`              tinyint(3) not null default 0  comment '状态（0：尚未开始 1：正在进行 2：已结束）',
+    score                 int4 default 0  comment '分数',
     start_time           datetime                comment '开始时间',
     end_time             datetime                comment '结束时间',
     PRIMARY KEY (`id`)
@@ -86,6 +87,7 @@ CREATE TABLE `tb_examination_info`
     exam_id               bigint        default 0  comment '考试id',
     user_id               bigint        default 0  comment '用户id',
     exercise_id           bigint        default 0  comment '题目id',
+    answer                varchar(64)   default '' comment '答案',
     is_true               int4          default 1  comment '是否正确 0：否 1：是',
     create_by             varchar(64)   default '' comment '创建者',
     create_time           datetime                 comment '创建时间',

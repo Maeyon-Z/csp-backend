@@ -44,4 +44,8 @@
         SELECT b.*, a.* FROM tb_paper_exercise a LEFT JOIN tb_exercises b on a.exercise_id = b.id where a.paper_id = #{paperId} and b.parent_id = #{parentId}
     </select>
 
+    <select id="getPaperExerciseScore" resultType="Integer">
+        SELECT a.score from tb_paper_exercise a left join tb_exam b on a.paper_id = b.paper_id where b.id = #{examId} and a.exercise_id = #{exerciseId}
+    </select>
+
 </mapper>

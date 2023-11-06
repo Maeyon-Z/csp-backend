@@ -4,15 +4,13 @@ import java.util.Date;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
-import com.ruoyi.project.cspCommon.domain.StuExam;
-import com.ruoyi.project.cspCommon.domain.TbExamUser;
-import com.ruoyi.project.cspCommon.mapper.TbExamUserMapper;
+import com.ruoyi.project.cspCommon.domain.*;
+import com.ruoyi.project.cspCommon.mapper.*;
+import com.ruoyi.project.cspCommon.params.SubmitExamParams;
 import com.ruoyi.project.system.domain.SysUser;
 import com.ruoyi.project.system.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.project.cspCommon.mapper.TbExamMapper;
-import com.ruoyi.project.cspCommon.domain.TbExam;
 import com.ruoyi.project.cspCommon.service.ITbExamService;
 
 /**
@@ -30,6 +28,12 @@ public class TbExamServiceImpl implements ITbExamService
     private SysUserMapper sysUserMapper;
     @Autowired
     private TbExamUserMapper tbExamUserMapper;
+    @Autowired
+    private ExerciseMapper exerciseMapper;
+    @Autowired
+    private PaperExerciseMapper paperExerciseMapper;
+    @Autowired
+    private TbExaminationInfoMapper tbExaminationInfoMapper;
 
     /**
      * 查询考试管理
@@ -53,11 +57,9 @@ public class TbExamServiceImpl implements ITbExamService
     public List<TbExam> selectTbExamList(TbExam tbExam)
     {
         List<TbExam> res = tbExamMapper.selectTbExamList(tbExam);
-
         for(TbExam exam : res){
             exam.setUsers(tbExamUserMapper.getExamUsersByExamId(exam.getId()));
         }
-
         return res;
     }
 
@@ -148,6 +150,28 @@ public class TbExamServiceImpl implements ITbExamService
     @Override
     public StuExam getStuExamById(Long id) {
         return tbExamMapper.getStuExamById(id);
+    }
+
+    @Override
+    public int submitExam(SubmitExamParams params) {
+        // 提交试卷
+        // 1、对于每道题目，判断是否正确，同时计算总分数、插入考试记录表
+        Long userId = params.getUserId();
+        Long examId = params.getExamId();
+        Integer score = 0;
+        for(Integer exerciseId : params.getAnswer().keySet()){
+            TbExaminationInfo info = TbExaminationInfo.build(examId, userId, exerciseId.longValue(), params.getAnswer().get(exerciseId));
+            if(params.getAnswer().get(exerciseId).equals(exerciseMapper.selectExerciseById(exerciseId.longValue()).getCorrectAnswer())){
+                score += paperExerciseMapper.getPaperExerciseScore(exerciseId, examId);
+                info.setIsTrue(1L);
+            }else{
+                info.setIsTrue(0L);
+            }
+            tbExaminationInfoMapper.insertTbExaminationInfo(info);
+        }
+        // 2、更新用户-考试关系表
+        tbExamUserMapper.endExam(userId, examId, score);
+        return score;
     }
 
 }

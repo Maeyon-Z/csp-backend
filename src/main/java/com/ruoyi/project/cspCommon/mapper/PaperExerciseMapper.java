@@ -31,4 +31,6 @@ public interface PaperExerciseMapper
     public int deleteTbPaperExerciseByIds(Long[] ids);
 
     List<TbPaperExercise> findChildExerciseScore(Long paperId, Long parentId);
+
+    Integer getPaperExerciseScore(Integer exerciseId, Long examId);
 }

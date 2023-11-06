@@ -23,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="examId"    column="exam_id"    />
         <result property="examName"    column="exam_name"    />
         <result property="paperId"    column="paper_id"    />
+        <result property="score"    column="score"    />
         <result property="paperName"    column="paper_name"    />
         <result property="duration"    column="duration"    />
         <result property="isDelete"    column="is_delete"    />
@@ -107,7 +108,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <select id="selectStuExamList" resultMap="StuExamResult">
-        select a.id, a.user_id, a.exam_id, a.`status`, a.start_time, a.end_time,
+        select a.id, a.user_id, a.exam_id, a.`status`, a.start_time, a.end_time,a.score,
         b.exam_name, b.paper_id, b.paper_name, b.duration, b.is_delete, b.create_by, b.create_time, b.update_by, b.update_time
         from tb_exam_user a left join tb_exam b on a.exam_id = b.id
         <where>
@@ -118,7 +119,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="getStuExamById" resultMap="StuExamResult">
-        select a.id, a.user_id, a.exam_id, a.`status`, a.start_time, a.end_time,
+        select a.id, a.user_id, a.exam_id, a.`status`, a.start_time, a.end_time,a.score,
         b.exam_name, b.paper_id, b.paper_name, b.duration, b.is_delete, b.create_by, b.create_time, b.update_by, b.update_time
         from tb_exam_user a left join tb_exam b on a.exam_id = b.id
         where a.id = #{id}

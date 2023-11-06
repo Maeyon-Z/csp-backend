@@ -44,6 +44,8 @@ public class StuExam extends BaseEntity {
     @Excel(name = "是否删除 0:否 1:是")
     private Long isDelete;
 
+    private Integer score;
+
     private List<Long> users;
 
     private Integer status;

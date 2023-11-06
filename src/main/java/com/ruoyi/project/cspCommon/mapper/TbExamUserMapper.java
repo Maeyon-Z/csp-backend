@@ -64,4 +64,6 @@ public interface TbExamUserMapper
     List<Long> getExamUsersByExamId(Long examId);
 
     int startExam(TbExamUser tbExamUser);
+
+    int endExam(Long userId, Long examId, Integer score);
 }
