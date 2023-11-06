@@ -1,5 +1,6 @@
 package com.ruoyi.project.cspCommon.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
@@ -137,8 +138,16 @@ public class TbExamServiceImpl implements ITbExamService
     }
 
     @Override
-    public int startExam(Long userId, Long examId) {
-        tbExamUserMapper.startExam(userId, examId);
-        return 1;
+    public int startExam(StuExam stuExam) {
+        Date startTime = DateUtils.getNowDate();
+        Date endTime = new Date(startTime.getTime() + stuExam.getDuration() * 60 * 1000);
+        TbExamUser tbExamUser = TbExamUser.build(stuExam.getExamId(), SecurityUtils.getUserId(), 1L, startTime, endTime);
+        return tbExamUserMapper.startExam(tbExamUser);
     }
+
+    @Override
+    public StuExam getStuExamById(Long id) {
+        return tbExamMapper.getStuExamById(id);
+    }
+
 }

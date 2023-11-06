@@ -66,5 +66,7 @@ public interface ITbExamService
 
     List<StuExam> selectStuExamList(TbExam tbExam);
 
-    int startExam(Long userId, Long examId);
+    int startExam(StuExam stuExam);
+
+    StuExam getStuExamById(Long id);
 }

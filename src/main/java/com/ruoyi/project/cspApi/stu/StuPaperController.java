@@ -29,4 +29,20 @@ public class StuPaperController extends BaseController
     }
 
 
+    @PreAuthorize("@ss.hasPermi('stu:exam:list')")
+    @GetMapping(value = "/{id}")
+    public AjaxResult getPaperInfo(@PathVariable("id") Long id)
+    {
+        return success(tbPaperService.selectTbPaperById(id));
+    }
+
+    /**
+     * 获取试卷题目
+     */
+    @PreAuthorize("@ss.hasPermi('stu:exam:list')")
+    @GetMapping(value = "/getPaperExercise/{paperId}/{type}")
+    public AjaxResult getPaperExercise(@PathVariable("paperId") Long paperId, @PathVariable("type") Long type)
+    {
+        return success(tbPaperService.getPaperExercise(paperId, type));
+    }
 }

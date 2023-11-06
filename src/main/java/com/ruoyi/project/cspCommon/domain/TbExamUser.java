@@ -51,6 +51,16 @@ public class TbExamUser extends BaseEntity
         return tbExamUser;
     }
 
+    public static TbExamUser build(Long examId, Long userId, Long status, Date startTime, Date endTime){
+        TbExamUser tbExamUser = new TbExamUser();
+        tbExamUser.setExamId(examId);
+        tbExamUser.setUserId(userId);
+        tbExamUser.setStatus(status);
+        tbExamUser.setStartTime(startTime);
+        tbExamUser.setEndTime(endTime);
+        return tbExamUser;
+    }
+
     public void setId(Long id)
     {
         this.id = id;

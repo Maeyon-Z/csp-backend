@@ -64,4 +64,6 @@ public interface TbExamMapper
     public int deleteTbExamByIds(Long[] ids);
 
     List<StuExam> selectStuExamList(String examName, Long stuId);
+
+    StuExam getStuExamById(Long id);
 }

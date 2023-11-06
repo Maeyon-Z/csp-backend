@@ -38,6 +38,13 @@ public class StuExamController extends BaseController
     }
 
     @PreAuthorize("@ss.hasPermi('stu:exam:list')")
+    @GetMapping("/getStuExamById/{id}")
+    public AjaxResult list(@PathVariable("id") Long id)
+    {
+        return success(tbExamService.getStuExamById(id));
+    }
+
+    @PreAuthorize("@ss.hasPermi('stu:exam:list')")
     @GetMapping("/getAllUser")
     public AjaxResult getAllUser()
     {
@@ -45,11 +52,10 @@ public class StuExamController extends BaseController
     }
 
     @PreAuthorize("@ss.hasPermi('stu:exam:list')")
-    @GetMapping("/startExam/{userId}/{examId}")
-    public AjaxResult startExam(@PathVariable("userId") Long userId, @PathVariable("examId") Long examId)
+    @PostMapping("/startExam")
+    public AjaxResult startExam(@RequestBody StuExam stuExam)
     {
-        // todo 修改开始考试的实现为更新记录 而不是单独的写sql
-        return toAjax(tbExamService.startExam(userId, examId));
+        return toAjax(tbExamService.startExam(stuExam));
     }
 
   }
