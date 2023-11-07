@@ -24,6 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
         <result property="remark"    column="remark"    />
         <result property="score"    column="score"    />
+        <result property="errorCounts"    column="error_counts"    />
     </resultMap>
 
     <sql id="selectExerciseVo">
@@ -42,7 +43,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              and is_delete = 0 and parent_id = -1
         </where>
     </select>
-    
+
+    <select id="selectErrorExerciseList" resultMap="ExerciseResult">
+        select
+            b.id, b.exercise_title, b.exercise_program, b.choice_a, b.choice_b, b.choice_c, b.choice_d, b.correct_answer, b.analysis, b.exercise_type, b.ques_type, b.remark,
+            a.error_counts
+        from tb_error_exercise a left join tb_exercises b on a.exercise_id = b.id
+        <where>
+            <if test="exerciseTitle != null  and exerciseTitle != ''"> and b.exercise_title like concat('%', #{exerciseTitle}, '%')</if>
+            <if test="exerciseProgram != null  and exerciseProgram != ''"> and b.exercise_program like concat('%', #{exerciseProgram}, '%')</if>
+            <if test="remark != null  and remark != ''"> and b.remark like concat('%', #{remark}, '%')</if>
+            <if test="quesType != null "> and b.ques_type = #{quesType}</if>
+            <if test="quesType == null"> and (b.ques_type = 1 or b.ques_type = 2 )</if>
+            and a.is_delete = 0 and b.parent_id = -1 and a.user_id = #{userId}
+        </where>
+    </select>
+
     <select id="selectExerciseById" parameterType="Long" resultMap="ExerciseResult">
         <include refid="selectExerciseVo"/>
         where id = #{id}

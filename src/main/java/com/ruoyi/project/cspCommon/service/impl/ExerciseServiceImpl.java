@@ -3,6 +3,7 @@ package com.ruoyi.project.cspCommon.service.impl;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.project.cspCommon.mapper.TbErrorExerciseMapper;
 import com.ruoyi.project.cspCommon.params.GeneratePracticeParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class ExerciseServiceImpl implements IExerciseService
 {
     @Autowired
     private ExerciseMapper exerciseMapper;
+    @Autowired
+    private TbErrorExerciseMapper errorExerciseMapper;
 
     /**
      * 查询题目
@@ -114,5 +117,20 @@ public class ExerciseServiceImpl implements IExerciseService
     public List<Exercise> genPractice(GeneratePracticeParams params) {
         if(params.getCount() == -1) params.setCount(null);
         return exerciseMapper.genPractice(params.getCount(), params.getType());
+    }
+
+    @Override
+    public List<Exercise> getErrorList(Exercise exercise) {
+        return exerciseMapper.selectErrorExerciseList(
+                exercise.getQuesType(),
+                exercise.getExerciseProgram(),
+                exercise.getExerciseTitle(),
+                exercise.getRemark(),
+                SecurityUtils.getUserId());
+    }
+
+    @Override
+    public int delError(Long id) {
+        return errorExerciseMapper.deleteTbErrorExerciseById(id);
     }
 }

@@ -47,8 +47,6 @@ public class StuExerciseController extends BaseController
 
     /**
      * 获取程序题下面的多道问题
-     * @param parentId
-     * @return
      */
     @PreAuthorize("@ss.hasPermi('stu:exam:list')")
     @GetMapping(value = "/ques/{parentId}")

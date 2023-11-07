@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.cspCommon.mapper.TbErrorExerciseMapper">
+
+    <resultMap type="TbErrorExercise" id="TbErrorExerciseResult">
+        <result property="id"    column="id"    />
+        <result property="exerciseId"    column="exercise_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="errorCounts"    column="error_counts"    />
+        <result property="isDelete"    column="is_delete"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectTbErrorExerciseVo">
+        select id, exercise_id, user_id, error_counts, is_delete, create_by, create_time, update_by, update_time from tb_error_exercise
+    </sql>
+
+    <select id="selectTbErrorExerciseList" parameterType="TbErrorExercise" resultMap="TbErrorExerciseResult">
+        <include refid="selectTbErrorExerciseVo"/>
+        <where>
+            <if test="exerciseId != null "> and exercise_id = #{exerciseId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="errorCounts != null "> and error_counts = #{errorCounts}</if>
+            <if test="isDelete != null "> and is_delete = #{isDelete}</if>
+        </where>
+    </select>
+
+    <select id="selectTbErrorExerciseById" parameterType="Long" resultMap="TbErrorExerciseResult">
+        <include refid="selectTbErrorExerciseVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTbErrorExercise" parameterType="TbErrorExercise" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_error_exercise
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="exerciseId != null">exercise_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="errorCounts != null">error_counts,</if>
+            <if test="isDelete != null">is_delete,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="exerciseId != null">#{exerciseId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="errorCounts != null">#{errorCounts},</if>
+            <if test="isDelete != null">#{isDelete},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTbErrorExercise" parameterType="TbErrorExercise">
+        update tb_error_exercise
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="exerciseId != null">exercise_id = #{exerciseId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="errorCounts != null">error_counts = #{errorCounts},</if>
+            <if test="isDelete != null">is_delete = #{isDelete},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="deleteTbErrorExerciseById" parameterType="Long">
+        update tb_error_exercise set is_delete = 1 where id = #{id}
+    </update>
+
+    <delete id="deleteTbErrorExerciseByIds" parameterType="String">
+        delete from tb_error_exercise where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

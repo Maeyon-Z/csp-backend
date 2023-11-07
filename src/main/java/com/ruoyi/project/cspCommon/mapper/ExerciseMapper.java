@@ -75,4 +75,7 @@ public interface ExerciseMapper
     List<Exercise> findPaperExerciseByType(Long paperId, Long type);
 
     List<Exercise> genPractice(Integer count, Integer type);
+
+    List<Exercise> selectErrorExerciseList(Long quesType, String exerciseProgram, String exerciseTitle, String remark, Long userId);
+
 }

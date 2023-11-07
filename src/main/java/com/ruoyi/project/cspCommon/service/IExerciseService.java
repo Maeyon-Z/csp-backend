@@ -63,4 +63,8 @@ public interface IExerciseService
     List<Exercise> selectExerciseByParentId(Long parentId);
 
     List<Exercise> genPractice(GeneratePracticeParams params);
+
+    List<Exercise> getErrorList(Exercise exercise);
+
+    int delError(Long id);
 }

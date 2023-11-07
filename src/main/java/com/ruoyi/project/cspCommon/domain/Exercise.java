@@ -1,6 +1,8 @@
 package com.ruoyi.project.cspCommon.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
@@ -15,6 +17,8 @@ import java.util.Map;
  * @date 2023-10-25
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Exercise extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -71,144 +75,5 @@ public class Exercise extends BaseEntity
 
     private Map<Long, Integer> scoreList;
 
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
-
-    public Long getId() 
-    {
-        return id;
-    }
-
-    public void setParentId(Long parentId)
-    {
-        this.parentId = parentId;
-    }
-
-    public Long getParentId()
-    {
-        return this.parentId;
-    }
-
-
-    public String getExerciseProgram(){
-        return this.exerciseProgram;
-    }
-
-    public void setExerciseProgram(String exerciseProgram){
-        this.exerciseProgram = exerciseProgram;
-    }
-    public void setExerciseTitle(String exerciseTitle) 
-    {
-        this.exerciseTitle = exerciseTitle;
-    }
-
-    public String getExerciseTitle() 
-    {
-        return exerciseTitle;
-    }
-    public void setChoiceA(String choiceA) 
-    {
-        this.choiceA = choiceA;
-    }
-
-    public String getChoiceA() 
-    {
-        return choiceA;
-    }
-    public void setChoiceB(String choiceB) 
-    {
-        this.choiceB = choiceB;
-    }
-
-    public String getChoiceB() 
-    {
-        return choiceB;
-    }
-    public void setChoiceC(String choiceC) 
-    {
-        this.choiceC = choiceC;
-    }
-
-    public String getChoiceC() 
-    {
-        return choiceC;
-    }
-    public void setChoiceD(String choiceD) 
-    {
-        this.choiceD = choiceD;
-    }
-
-    public String getChoiceD() 
-    {
-        return choiceD;
-    }
-    public void setCorrectAnswer(String correctAnswer) 
-    {
-        this.correctAnswer = correctAnswer;
-    }
-
-    public String getCorrectAnswer() 
-    {
-        return correctAnswer;
-    }
-    public void setAnalysis(String analysis) 
-    {
-        this.analysis = analysis;
-    }
-
-    public String getAnalysis() 
-    {
-        return analysis;
-    }
-    public void setExerciseType(Long exerciseType) 
-    {
-        this.exerciseType = exerciseType;
-    }
-
-    public Long getExerciseType() 
-    {
-        return exerciseType;
-    }
-    public void setQuesType(Long quesType) 
-    {
-        this.quesType = quesType;
-    }
-
-    public Long getQuesType() 
-    {
-        return quesType;
-    }
-    public void setIsDelete(Long isDelete) 
-    {
-        this.isDelete = isDelete;
-    }
-
-    public Long getIsDelete() 
-    {
-        return isDelete;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("exerciseTitle", getExerciseTitle())
-                .append("exerciseProgram", getExerciseProgram())
-            .append("choiceA", getChoiceA())
-            .append("choiceB", getChoiceB())
-            .append("choiceC", getChoiceC())
-            .append("choiceD", getChoiceD())
-            .append("correctAnswer", getCorrectAnswer())
-            .append("analysis", getAnalysis())
-            .append("exerciseType", getExerciseType())
-            .append("quesType", getQuesType())
-            .append("isDelete", getIsDelete())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .toString();
-    }
+    private Integer errorCounts;
 }
