@@ -5,6 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.project.cspCommon.mapper.TbErrorExerciseMapper;
 import com.ruoyi.project.cspCommon.params.GeneratePracticeParams;
+import com.ruoyi.project.cspCommon.service.ITbExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.cspCommon.mapper.ExerciseMapper;
@@ -24,6 +25,8 @@ public class ExerciseServiceImpl implements IExerciseService
     private ExerciseMapper exerciseMapper;
     @Autowired
     private TbErrorExerciseMapper errorExerciseMapper;
+    @Autowired
+    private ITbExamService examService;
 
     /**
      * 查询题目
@@ -132,5 +135,10 @@ public class ExerciseServiceImpl implements IExerciseService
     @Override
     public int delError(Long id) {
         return errorExerciseMapper.deleteTbErrorExerciseById(id);
+    }
+
+    @Override
+    public void logError(Long id) {
+        examService.error(exerciseMapper.selectExerciseById(id));
     }
 }

@@ -2,6 +2,7 @@ package com.ruoyi.project.cspCommon.service;
 
 import java.util.List;
 
+import com.ruoyi.project.cspCommon.domain.Exercise;
 import com.ruoyi.project.cspCommon.domain.StuExam;
 import com.ruoyi.project.cspCommon.domain.TbExam;
 import com.ruoyi.project.cspCommon.domain.TbExamUser;
@@ -75,4 +76,6 @@ public interface ITbExamService
     int submitExam(SubmitExamParams params);
 
     List<TbExamUser> getRank(Long examId);
+
+    void error(Exercise exercise);
 }

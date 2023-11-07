@@ -67,4 +67,6 @@ public interface IExerciseService
     List<Exercise> getErrorList(Exercise exercise);
 
     int delError(Long id);
+
+    void logError(Long id);
 }

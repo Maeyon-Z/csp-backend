@@ -25,11 +25,11 @@ public class StuPracticeController {
     }
 
     @PreAuthorize("@ss.hasPermi('stu:practice:list')")
-    @PostMapping(value = "/submit")
-    public AjaxResult submit(@RequestBody GeneratePracticeParams params)
+    @GetMapping(value = "/submit/{id}")
+    public AjaxResult submit(@PathVariable("id") Long id)
     {
-        // todo 练习题提交，用于记录错题
-        return null;
+        exerciseService.logError(id);
+        return success();
     }
 
 }

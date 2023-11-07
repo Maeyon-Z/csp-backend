@@ -179,6 +179,7 @@ public class TbExamServiceImpl implements ITbExamService
         return score;
     }
 
+    @Override
     public void error(Exercise exercise){
         //记录错题
         TbErrorExercise errorExercise = errorExerciseMapper.selectTbErrorExercise(exercise.getId(), SecurityUtils.getUserId());
