@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectExerciseVo">
-        select id, exercise_title, exercise_program, choice_a, choice_b, choice_c, choice_d, correct_answer, analysis, exercise_type, ques_type, is_delete, create_by, create_time, update_by, update_time, remark from tb_exercises
+        select id, parent_id, exercise_title, exercise_program, choice_a, choice_b, choice_c, choice_d, correct_answer, analysis, exercise_type, ques_type, is_delete, create_by, create_time, update_by, update_time, remark from tb_exercises
     </sql>
 
     <select id="selectExerciseList" parameterType="Exercise" resultMap="ExerciseResult">
@@ -169,7 +169,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="genPractice" resultMap="ExerciseResult">
         <include refid="selectExerciseVo"/>
-        <where>x
+        <where>
             <if test="type != -1 "> and ques_type = #{type}</if>
             and is_delete = 0 and parent_id = -1
         </where>
