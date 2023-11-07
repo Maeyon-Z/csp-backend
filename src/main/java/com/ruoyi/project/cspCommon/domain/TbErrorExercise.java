@@ -8,6 +8,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
+import java.util.Date;
+
 /**
  * 错题记录对象 tb_error_exercise
  *
@@ -40,4 +42,14 @@ public class TbErrorExercise extends BaseEntity
     @Excel(name = "是否删除 0:否 1:是")
     private Long isDelete;
 
+
+    public static TbErrorExercise build(Long exerciseId, Long userId, Integer counts, String createBy, Date createTime) {
+        TbErrorExercise info = new TbErrorExercise();
+        info.setExerciseId(exerciseId);
+        info.setUserId(userId);
+        info.setErrorCounts(counts.longValue());
+        info.setCreateBy(createBy);
+        info.setCreateTime(createTime);
+        return info;
+    }
 }

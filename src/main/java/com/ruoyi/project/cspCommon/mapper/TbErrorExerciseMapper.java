@@ -60,4 +60,7 @@ public interface TbErrorExerciseMapper
      * @return 结果
      */
     public int deleteTbErrorExerciseByIds(Long[] ids);
+
+    TbErrorExercise selectTbErrorExercise(Long exerciseId, Long userId);
+
 }

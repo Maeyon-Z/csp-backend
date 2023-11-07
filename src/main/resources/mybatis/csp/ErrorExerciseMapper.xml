@@ -30,6 +30,11 @@
         </where>
     </select>
 
+    <select id="selectTbErrorExercise" resultMap="TbErrorExerciseResult">
+        <include refid="selectTbErrorExerciseVo"/>
+        where is_delete = 0 and exercise_id = #{exerciseId} and user_id = #{userId}
+    </select>
+
     <select id="selectTbErrorExerciseById" parameterType="Long" resultMap="TbErrorExerciseResult">
         <include refid="selectTbErrorExerciseVo"/>
         where id = #{id}

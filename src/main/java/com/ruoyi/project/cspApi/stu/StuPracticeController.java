@@ -17,12 +17,19 @@ public class StuPracticeController {
     private IExerciseService exerciseService;
 
 
-    @PreAuthorize("@ss.hasPermi('stu:practicesslist')")
+    @PreAuthorize("@ss.hasPermi('stu:practice:list')")
     @PostMapping(value = "/genExercise")
     public AjaxResult genExercise(@RequestBody GeneratePracticeParams params)
     {
-
         return success(exerciseService.genPractice(params));
+    }
+
+    @PreAuthorize("@ss.hasPermi('stu:practice:list')")
+    @PostMapping(value = "/submit")
+    public AjaxResult submit(@RequestBody GeneratePracticeParams params)
+    {
+        // todo 练习题提交，用于记录错题
+        return null;
     }
 
 }

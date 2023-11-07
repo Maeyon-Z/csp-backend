@@ -34,6 +34,8 @@ public class TbExamServiceImpl implements ITbExamService
     private PaperExerciseMapper paperExerciseMapper;
     @Autowired
     private TbExaminationInfoMapper tbExaminationInfoMapper;
+    @Autowired
+    private TbErrorExerciseMapper errorExerciseMapper;
 
 
     /**
@@ -155,7 +157,6 @@ public class TbExamServiceImpl implements ITbExamService
 
     @Override
     public int submitExam(SubmitExamParams params) {
-        // todo 记录错题
         // 提交试卷
         // 1、对于每道题目，判断是否正确，同时计算总分数、插入考试记录表a
         Long userId = params.getUserId();
@@ -163,10 +164,12 @@ public class TbExamServiceImpl implements ITbExamService
         Integer score = 0;
         for(Integer exerciseId : params.getAnswer().keySet()){
             TbExaminationInfo info = TbExaminationInfo.build(examId, userId, exerciseId.longValue(), params.getAnswer().get(exerciseId));
-            if(params.getAnswer().get(exerciseId).equals(exerciseMapper.selectExerciseById(exerciseId.longValue()).getCorrectAnswer())){
+            Exercise exercise = exerciseMapper.selectExerciseById(exerciseId.longValue());
+            if(params.getAnswer().get(exerciseId).equals(exercise.getCorrectAnswer())){
                 score += paperExerciseMapper.getPaperExerciseScore(exerciseId, examId);
                 info.setIsTrue(1L);
             }else{
+                error(exercise);
                 info.setIsTrue(0L);
             }
             tbExaminationInfoMapper.insertTbExaminationInfo(info);
@@ -174,6 +177,24 @@ public class TbExamServiceImpl implements ITbExamService
         // 2、更新用户-考试关系表
         tbExamUserMapper.endExam(userId, examId, score);
         return score;
+    }
+
+    public void error(Exercise exercise){
+        //记录错题
+        TbErrorExercise errorExercise = errorExerciseMapper.selectTbErrorExercise(exercise.getId(), SecurityUtils.getUserId());
+        if(errorExercise != null){
+            errorExercise.setErrorCounts(errorExercise.getErrorCounts()+1);
+            errorExercise.setUpdateBy(SecurityUtils.getUsername());
+            errorExercise.setUpdateTime(DateUtils.getNowDate());
+            errorExerciseMapper.updateTbErrorExercise(errorExercise);
+        }else{
+            if(exercise.getParentId() == -1){
+                errorExercise = TbErrorExercise.build(exercise.getId(), SecurityUtils.getUserId(), 1, SecurityUtils.getUsername(), DateUtils.getNowDate());
+            }else{
+                errorExercise = TbErrorExercise.build(exerciseMapper.selectExerciseById(exercise.getParentId()).getId(), SecurityUtils.getUserId(), 1, SecurityUtils.getUsername(), DateUtils.getNowDate());
+            }
+            errorExerciseMapper.insertTbErrorExercise(errorExercise);
+        }
     }
 
     @Override
