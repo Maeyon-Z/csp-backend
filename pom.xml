@@ -8,9 +8,8 @@
     <version>3.8.6</version>
     <packaging>jar</packaging>
 
-    <name>ruoyi</name>
-    <url>http://www.ruoyi.vip</url>
-    <description>若依管理系统</description>
+    <name>csp</name>
+    <description>csp在线刷题系统</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -244,7 +243,7 @@
 	</dependencies>
 
 	<build>
-	    <finalName>${project.artifactId}</finalName>
+	    <finalName>csp</finalName>
 	    <plugins>
 	        <plugin>
 	            <groupId>org.springframework.boot</groupId>
