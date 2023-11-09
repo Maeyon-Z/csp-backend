@@ -27,6 +27,26 @@ public class RuoYiConfig
     /** 上传路径 */
     private static String profile;
 
+    private static String serverIp;
+
+    private static String serverPort;
+
+    public static String getServerIp() {
+        return serverIp;
+    }
+
+    public static void setServerIp(String serverIp) {
+        RuoYiConfig.serverIp = serverIp;
+    }
+
+    public static String getServerPort() {
+        return serverPort;
+    }
+
+    public static void setServerPort(String serverPort) {
+        RuoYiConfig.serverPort = serverPort;
+    }
+
     /** 获取地址开关 */
     private static boolean addressEnabled;
 

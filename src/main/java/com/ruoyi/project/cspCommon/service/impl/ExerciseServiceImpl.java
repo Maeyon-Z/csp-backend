@@ -3,10 +3,12 @@ package com.ruoyi.project.cspCommon.service.impl;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.framework.config.RuoYiConfig;
 import com.ruoyi.project.cspCommon.mapper.TbErrorExerciseMapper;
 import com.ruoyi.project.cspCommon.params.GeneratePracticeParams;
 import com.ruoyi.project.cspCommon.service.ITbExamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.cspCommon.mapper.ExerciseMapper;
 import com.ruoyi.project.cspCommon.domain.Exercise;
@@ -27,6 +29,8 @@ public class ExerciseServiceImpl implements IExerciseService
     private TbErrorExerciseMapper errorExerciseMapper;
     @Autowired
     private ITbExamService examService;
+    @Value("${ruoyi.serverUrl}")
+    private String serverUrl;
 
     /**
      * 查询题目
@@ -63,6 +67,8 @@ public class ExerciseServiceImpl implements IExerciseService
     @Override
     public Long insertExercise(Exercise exercise)
     {
+        exercise.setExerciseProgram(changeImgUrl(exercise.getExerciseProgram()));
+        exercise.setExerciseTitle(changeImgUrl(exercise.getExerciseTitle()));
         exercise.setCreateTime(DateUtils.getNowDate());
         exercise.setCreateBy(SecurityUtils.getUsername());
         exerciseMapper.insertExercise(exercise);
@@ -78,9 +84,20 @@ public class ExerciseServiceImpl implements IExerciseService
     @Override
     public int updateExercise(Exercise exercise)
     {
+        exercise.setExerciseProgram(changeImgUrl(exercise.getExerciseProgram()));
+        exercise.setExerciseTitle(changeImgUrl(exercise.getExerciseTitle()));
         exercise.setUpdateTime(DateUtils.getNowDate());
         exercise.setUpdateBy(SecurityUtils.getUsername());
         return exerciseMapper.updateExercise(exercise);
+    }
+
+    private String changeImgUrl(String content){
+        if(content == null) return null;
+        if(content.contains("img")){
+            content = content.replaceAll("/dev-api", serverUrl);
+            content = content.replaceAll("/prod-api", serverUrl);
+        }
+        return content;
     }
 
     /**
