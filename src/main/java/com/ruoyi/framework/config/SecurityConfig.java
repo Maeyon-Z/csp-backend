@@ -65,12 +65,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Autowired
     private PermitAllUrlProperties permitAllUrl;
 
-    @Value("${server.port}")
-    private int httpsPort;
-
-    @Value("${server.httpPort}")
-    private int httpPort;
-
     /**
      * 解决 无法直接注入 AuthenticationManager
      *
@@ -105,11 +99,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         // 注解标记允许匿名访问的url
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = httpSecurity.authorizeRequests();
         permitAllUrl.getUrls().forEach(url -> registry.antMatchers(url).permitAll());
-
-        httpSecurity.portMapper().http(httpPort).mapsTo(httpsPort);
-        httpSecurity.requiresChannel(
-                channel -> channel.anyRequest().requiresSecure()
-        );
 
         httpSecurity
                 // CSRF禁用，因为不使用session
