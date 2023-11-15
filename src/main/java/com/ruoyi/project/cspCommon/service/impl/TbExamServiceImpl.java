@@ -7,7 +7,9 @@ import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.project.cspCommon.domain.*;
 import com.ruoyi.project.cspCommon.mapper.*;
 import com.ruoyi.project.cspCommon.params.SubmitExamParams;
+import com.ruoyi.project.system.domain.SysDept;
 import com.ruoyi.project.system.domain.SysUser;
+import com.ruoyi.project.system.mapper.SysDeptMapper;
 import com.ruoyi.project.system.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,8 @@ public class TbExamServiceImpl implements ITbExamService
     private TbExaminationInfoMapper tbExaminationInfoMapper;
     @Autowired
     private TbErrorExerciseMapper errorExerciseMapper;
+    @Autowired
+    private SysDeptMapper sysDeptMapper;
 
 
     /**
@@ -198,6 +202,11 @@ public class TbExamServiceImpl implements ITbExamService
             }
             errorExerciseMapper.insertTbErrorExercise(errorExercise);
         }
+    }
+
+    @Override
+    public List<SysDept> getAllDept() {
+        return sysDeptMapper.getAllDept();
     }
 
     @Override
