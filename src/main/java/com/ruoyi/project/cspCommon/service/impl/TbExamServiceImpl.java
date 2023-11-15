@@ -157,10 +157,12 @@ public class TbExamServiceImpl implements ITbExamService
 
     @Override
     public int submitExam(SubmitExamParams params) {
-        // 提交试卷
-        // 1、对于每道题目，判断是否正确，同时计算总分数、插入考试记录表a
+        // 提交试卷，首先删除旧的记录
         Long userId = params.getUserId();
         Long examId = params.getExamId();
+        tbExaminationInfoMapper.deleteTbExaminationInfo(userId, examId);
+        tbExamUserMapper.reStartExam(userId, examId);
+        // 1、对于每道题目，判断是否正确，同时计算总分数、插入考试记录表a
         Integer score = 0;
         for(Integer exerciseId : params.getAnswer().keySet()){
             TbExaminationInfo info = TbExaminationInfo.build(examId, userId, exerciseId.longValue(), params.getAnswer().get(exerciseId));
