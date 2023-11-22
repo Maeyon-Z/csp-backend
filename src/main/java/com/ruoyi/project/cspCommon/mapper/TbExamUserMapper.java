@@ -68,4 +68,6 @@ public interface TbExamUserMapper
     int endExam(Long userId, Long examId, Integer score);
 
     List<TbExamUser> getExamRank(Long examId);
+
+    int reStartExam(Long userId, Long examId);
 }

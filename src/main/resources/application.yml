@@ -11,17 +11,23 @@ ruoyi:
   # 文件路径
   profile: /Users/zmy/Project/csp_online/uploadPath
 #  profile: /root/csp/uploadPath
-  # 服务器ip:port
-  serverUrl: http://127.0.0.1:7070
+  # 服务器http ip:port
+  serverUrl: http://127.0.0.1:8000/dev-api
+#  serverUrl: http://47.98.152.146:8888/prod-api
   # 获取ip地址开关
   addressEnabled: false
   # 验证码类型 math 数字计算 char 字符验证
-  captchaType: char
+  captchaType: math
 
 # 开发环境配置
 server:
-  # 服务器的HTTP端口，默认为8080
+  # 服务器的HTTPS端口
   port: 7070
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: 123456
+    key-store-type: PKCS12
+    key-alias: tomcat
   servlet:
     # 应用的访问路径
     context-path: /

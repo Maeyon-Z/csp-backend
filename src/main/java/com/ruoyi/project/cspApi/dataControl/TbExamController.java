@@ -53,6 +53,14 @@ public class TbExamController extends BaseController
         return success(tbExamService.getAllUser());
     }
 
+    @PreAuthorize("@ss.hasPermi('dataControl:exam:list')")
+    @GetMapping("/getAllDept")
+    public AjaxResult getAllDept()
+    {
+        //todo 按照部门筛选
+        return success(tbExamService.getAllDept());
+    }
+
     /**
      * 导出考试管理列表
      */

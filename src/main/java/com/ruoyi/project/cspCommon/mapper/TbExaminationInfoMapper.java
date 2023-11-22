@@ -61,4 +61,6 @@ public interface TbExaminationInfoMapper
      * @return 结果
      */
     public int deleteTbExaminationInfoByIds(Long[] ids);
+
+    void deleteTbExaminationInfo(Long userId, Long examId);
 }

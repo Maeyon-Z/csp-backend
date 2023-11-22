@@ -7,6 +7,7 @@ import com.ruoyi.project.cspCommon.domain.StuExam;
 import com.ruoyi.project.cspCommon.domain.TbExam;
 import com.ruoyi.project.cspCommon.domain.TbExamUser;
 import com.ruoyi.project.cspCommon.params.SubmitExamParams;
+import com.ruoyi.project.system.domain.SysDept;
 import com.ruoyi.project.system.domain.SysUser;
 
 /**
@@ -78,4 +79,6 @@ public interface ITbExamService
     List<TbExamUser> getRank(Long examId);
 
     void error(Exercise exercise);
+
+    List<SysDept> getAllDept();
 }

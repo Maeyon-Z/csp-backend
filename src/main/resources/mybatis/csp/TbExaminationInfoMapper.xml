@@ -89,4 +89,9 @@
             #{id}
         </foreach>
     </delete>
+
+    <delete id="deleteTbExaminationInfo">
+        delete from tb_examination_info where user_id = #{userId} and exam_id = #{examId}
+    </delete>
+
 </mapper>

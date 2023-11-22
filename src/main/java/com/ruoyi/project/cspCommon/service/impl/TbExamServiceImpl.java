@@ -7,7 +7,9 @@ import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.project.cspCommon.domain.*;
 import com.ruoyi.project.cspCommon.mapper.*;
 import com.ruoyi.project.cspCommon.params.SubmitExamParams;
+import com.ruoyi.project.system.domain.SysDept;
 import com.ruoyi.project.system.domain.SysUser;
+import com.ruoyi.project.system.mapper.SysDeptMapper;
 import com.ruoyi.project.system.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,8 @@ public class TbExamServiceImpl implements ITbExamService
     private TbExaminationInfoMapper tbExaminationInfoMapper;
     @Autowired
     private TbErrorExerciseMapper errorExerciseMapper;
+    @Autowired
+    private SysDeptMapper sysDeptMapper;
 
 
     /**
@@ -157,10 +161,12 @@ public class TbExamServiceImpl implements ITbExamService
 
     @Override
     public int submitExam(SubmitExamParams params) {
-        // 提交试卷
-        // 1、对于每道题目，判断是否正确，同时计算总分数、插入考试记录表a
+        // 提交试卷，首先删除旧的记录
         Long userId = params.getUserId();
         Long examId = params.getExamId();
+        tbExaminationInfoMapper.deleteTbExaminationInfo(userId, examId);
+        tbExamUserMapper.reStartExam(userId, examId);
+        // 1、对于每道题目，判断是否正确，同时计算总分数、插入考试记录表a
         Integer score = 0;
         for(Integer exerciseId : params.getAnswer().keySet()){
             TbExaminationInfo info = TbExaminationInfo.build(examId, userId, exerciseId.longValue(), params.getAnswer().get(exerciseId));
@@ -196,6 +202,11 @@ public class TbExamServiceImpl implements ITbExamService
             }
             errorExerciseMapper.insertTbErrorExercise(errorExercise);
         }
+    }
+
+    @Override
+    public List<SysDept> getAllDept() {
+        return sysDeptMapper.getAllDept();
     }
 
     @Override
