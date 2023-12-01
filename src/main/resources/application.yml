@@ -9,11 +9,12 @@ ruoyi:
   # 实例演示开关
   demoEnabled: true
   # 文件路径
-  profile: /Users/zmy/Project/csp_online/uploadPath
-#  profile: /root/csp/uploadPath
+#  profile: /Users/zmy/Project/csp_online/uploadPath
+  profile: /root/csp/uploadPath
   # 服务器http ip:port
-  serverUrl: http://127.0.0.1:8000/dev-api
+#  serverUrl: http://127.0.0.1:8000/dev-api
 #  serverUrl: http://47.98.152.146:8888/prod-api
+  serverUrl: http://8.136.201.183:8888/prod-api
   # 获取ip地址开关
   addressEnabled: false
   # 验证码类型 math 数字计算 char 字符验证
